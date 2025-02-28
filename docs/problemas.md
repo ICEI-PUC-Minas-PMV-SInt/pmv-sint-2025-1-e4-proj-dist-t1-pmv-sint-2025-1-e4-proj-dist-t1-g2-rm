@@ -1,6 +1,5 @@
 # Problemas & dores
 
-> Apresente os principais problemas e dificuldades que o software irá solucionar, oferecendo uma visão geral dos seus benefícios. Os detalhes sobre as funcionalidades serão abordados em seguida. Para nortear a sua descrição, responda à seguinte pergunta: quais são os problemas e dificuldades mais relevantes no contexto atual?
 
 1. A maior parte da população não sabe onde e como descartar corretamente seus resíduos eletrônicos, resultando no descarte inadequado.
 2. Metais pesados e componentes tóxicos de eletrônicos podem contaminar o solo, a água e prejudicar a saúde da população se não descartados corretamente.
