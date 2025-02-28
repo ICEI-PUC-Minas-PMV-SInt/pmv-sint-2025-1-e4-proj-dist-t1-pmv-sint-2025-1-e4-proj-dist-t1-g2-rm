@@ -2,11 +2,11 @@
 
 > Apresente os principais problemas e dificuldades que o software irá solucionar, oferecendo uma visão geral dos seus benefícios. Os detalhes sobre as funcionalidades serão abordados em seguida. Para nortear a sua descrição, responda à seguinte pergunta: quais são os problemas e dificuldades mais relevantes no contexto atual?
 
-1. Organizar e gerenciar as horas trabalhadas em múltiplos projetos e clientes, levando à desorganização e perda de produtividade.
-2. A necessidade de priorizar tarefas por importância e urgência é um desafio, resultando em sobrecarga e prazos perdidos.
-3. A falta de medição precisa do tempo dedicado a cada tarefa e projeto dificulta a cobrança justa e precisa dos serviços.
-4. A emissão para emissão de notas fiscais eletrônicas é um processo manual demorado e sujeito a erros.
-5. A dificuldade em visualizar o custo real de cada projeto com base nas horas trabalhadas impede a análise da rentabilidade e a tomada de decisões estratégicas.
-6. A ausência de uma solução unificada para gestão de trabalho e tempo força freelancers a usar múltiplas ferramentas, resultando em ineficiência e perda de tempo.
+1. A maior parte da população não sabe onde e como descartar corretamente seus resíduos eletrônicos, resultando no descarte inadequado.
+2. Metais pesados e componentes tóxicos de eletrônicos podem contaminar o solo, a água e prejudicar a saúde da população se não descartados corretamente.
+3. A coleta pública de lixo eletrônico é ineficiente ou inexistente em muitas cidades.
+4. Os locais para descarte de pilhas, baterias e eletrônicos são escassos, mal distribuídos e mal divulgados na grande maioria das cidades brasileiras.
+5. Falta de um incentivo para a população descartar corretamente seus eletrônicos. Muitas pessoas não veem vantagem em descartar corretamente seus eletrônicos
+6. Embora muitos dispositivos eletrônicos possam ser reaproveitados, eles continuam sendo descartados de forma inadequada, mesmo quando ainda funcionam ou apresentam apenas pequenas avarias.
 
 [Retorna](../README.md)
