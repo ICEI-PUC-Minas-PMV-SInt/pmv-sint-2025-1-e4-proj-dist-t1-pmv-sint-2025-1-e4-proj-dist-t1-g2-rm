@@ -1,6 +1,5 @@
 # Expectativas
 
-Neste momento, concentre-se em descrever as expectativas para o produto, sem entrar em detalhes sobre a solução. Enumere as possibilidades que auxiliam a resolver os problemas e dificuldades dos usuários no cenário corrente, respondendo às perguntas: quais são as expectativas em relação ao produto? Aonde você almeja chegar com ele?
 1.	Espera-se que o Recicla Mais seja uma ferramenta acessível e intuitiva para facilitar o descarte correto de lixo eletrônico, evitando impactos ambientais negativos. 
 2.	Os usuários devem ter acesso a um sistema que permita o agendamento rápido e eficiente da coleta, garantindo que seus resíduos eletrônicos sejam recolhidos de maneira adequada e sustentável. 
 3.	A plataforma incentiva o descarte consciente por meio de um programa de benefícios, onde os usuários acumulem pontos para trocar com empresas parceiras, estimulando a participação ativa na reciclagem. 
