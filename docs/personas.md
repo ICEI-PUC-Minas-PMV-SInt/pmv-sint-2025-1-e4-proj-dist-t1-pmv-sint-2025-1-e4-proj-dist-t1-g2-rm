@@ -1,35 +1,31 @@
 # Personas
 
-> Identifique as principais personas e descreva suas atividades, respondendo às seguintes perguntas:
-> qual é o perfil de cada persona? O que elas esperam do produto de software?
-
-## Persona 1: Ana, a Freelancer de Design Gráfico
+## Persona 1: Ana Silveira, Secretaria Municipal
 
 - **Perfil:**
-  * Ana é uma designer gráfica freelancer experiente, especializada em branding e identidade visual.
-  * Ela é organizada, detalhista e busca constantemente otimizar seu fluxo de trabalho.
-  * Ana valoriza ferramentas que a ajudem a manter o foco, cumprir prazos e gerenciar múltiplos projetos simultaneamente.
-  * Ela necessita de um sistema que a auxilie na organização de seus clientes, e no processo de emissão de notas fiscais.
+  * Ana Silveira é secretaria Municipal do meio ambiente da cidade de Belo Horizonte.
+  * Ela é organizada, detalhista e busca constantemente educar a população ao descarte corretor  de eletronicos      .
+  * Ana valoriza ferramentas que a ajudem a promover a redução da poluição.
+  * Ela necessita de um sistema que gere benefícios com os descartes reutilizáveis e agendamentos.
 - **Expectativas:**
-  * Ela busca recursos como cronometragem precisa, técnicas de produtividade e geração de relatórios de tempo e custos.
-  * Ana espera que o software tenha uma integração com a receita federal, ou que de alguma forma auxilie ela no processo de emissão de notas fiscais.
+  * Ela busca recursos como cadastro de usuários, telas em que possa ver noticias de descarte conciente de lixos eletronicos.
+  * Ana espera que o software tenha uma integração com o usuário, ou que de alguma forma auxilie eles para agendar coletas.
 - **Atividades:**
-  * Ana usa o software para criar e monitorar tarefas, registrar horas trabalhadas, priorizar atividades, aplicar técnicas de produtividade, sincronizar prazos com o Google Calendar e gerar relatórios para clientes.
-  * Ana utiliza o software para gerar os dados de suas notas fiscais, e organizar seus clientes
+  * Ana usa o software para monitorar os agendamentos, ou Para vizualizar os email de fale conosco.
+  
 
-## Persona 2: Carlos, o Cliente Empreendedor
+## Persona 2: João Oliveira, Comerciante 
 
 - **Perfil:**
-  * Carlos é um empreendedor dinâmico e dono de uma agência de marketing digital.
-  * Ele valoriza a transparência, a eficiência e a comunicação clara com seus colaboradores freelancers.
-  * Carlos precisa de ferramentas que o ajudem a acompanhar o progresso dos projetos, controlar os custos e garantir a qualidade do trabalho entregue.
-  * Carlos necessita de uma ferramenta que lhe auxilie a organizar os diversos freelancers que prestam serviço a ele.
+  * Carlos é um comerciante, morador de Belo Horizonte com varios lixos eletronicos para fazer o descarte.
+  * Ele é um conscientizador ecológico e aprecia a natureza.
+  * Carlos precisa de ferramentas que o ajudem a agendar coletas de lixo eletronicos tanto na casa dele quanto no   comercio, precisa também de informações para o descarte consciente de resíduos eletrônicos.
 - **Expectativas:**
-  * Carlos espera que o software forneça informações precisas sobre o tempo gasto pelos freelancers em cada tarefa e projeto.
-  * Ele deseja receber relatórios detalhados e atualizados sobre o progresso, os custos e o desempenho dos freelancers.
-  * Carlos busca uma plataforma que facilite a comunicação e a colaboração com os freelancers, garantindo a entrega de projetos dentro do prazo e do orçamento.
+  * Carlos espera que o software forneça informações precisas sobre data e horário da coleta, quantos intens podem ser coletados, quantidade e qualidades dos itens a serem coletados, ele também precisa saber quais benéficios ganharam com cada item coletado.  
+  * Ele deseja receber A confirmação do seu agendamento e  quando a troca de pontos foi realizada.
+  * Carlos busca uma plataforma que facilite o agendamento e as trocas de pontos dele.
 - **Atividades:**
-  * Carlos usa o software para monitorar relatórios de tempo e custos, avaliar o desempenho dos freelancers, aprovar pagamentos, comunicar-se com os freelancers e analisar dados para tomar decisões estratégicas.
-  * Carlos utiliza o programa para organizar os diversos freelancers que trabalham com ele.
+  * Carlos usa o software para realizar agendamentos, ver noticias recentes de residos eletronicos e possa fazer trocas de pontos em parceiros na plataforma
+  
 
 [Retorna](../README.md)
