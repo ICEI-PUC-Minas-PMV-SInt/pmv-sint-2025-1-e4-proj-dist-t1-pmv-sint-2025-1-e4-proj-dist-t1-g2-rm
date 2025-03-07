@@ -1,15 +1,8 @@
-> Para identificar o produto a ser construído, atribua um nome a ele da seguinte forma:
-> imagine o produto em uma caixa e determine qual nome estaria escrito nela.
-
-# ToDoZ
+# Recicla Mais
 
 # Visão do Produto
 
-> Uma visão clara do produto é fundamental para definir o alicerce do seu negócio. Essa visão deve expressar o valor central que sua empresa oferece, comunicando-o de forma clara e envolvente aos seus clientes. Utilize o modelo a seguir para construir a visão do seu produto:
-
-> Para [o nome do cliente final], cujo [o problema que precisa ser resolvido]. O [o nome do produto] é [a categoria do produto] que [o benefício-chave, razão para adquiri-lo]. Diferentemente de [alternativa da concorrência], o nosso produto [a diferença-chave].
-
-Para freelancers que trabalham em diversos projetos, cujo o problema é organizar a cobrança de seus serviços e emitir notas fiscais eletrônicas de forma eficiente e com segurança. O ToDoZ é um software de registro de horas trabalhadas em tarefas executadas em projetos para clientes que automatiza a criação de relatórios de cobrança detalhados, facilitando a aprovação do cliente e a emissão da nota fiscal eletrônica com simplicidade, e reduzindo a possibilidade de erros. Diferentemente de outras soluções no mercado, que utilizam diversas ferramentas como planilhas e agendas eletrônicas, o ToDoZ centraliza todo o processo em uma única plataforma, otimizando o fluxo de trabalho diário do freelancer, economizando tempo precioso.
+O ReciclaMais foi pensado para cidadãos e empresas que desejam descartar corretamente resíduos eletrônicos, mas enfrentam dificuldades em encontrar locais apropriados e eficientes para a coleta. O **Recicla Mais** é um sistema de agendamento de coletas de resíduos eletrônicos que permite aos usuários cadastrarem seus endereços e selecionarem datas disponíveis de acordo com a logística regional, garantindo um descarte ambientalmente responsável. Diferentemente de soluções que exigem deslocamento até pontos de coleta fixos, o **Recicla Mais** oferece comodidade ao permitir que os resíduos sejam recolhidos diretamente no local indicado pelo usuário. Além disso, recompensa a participação com um sistema de pontos que podem ser trocados por benefícios, incentivando a reciclagem.
 
 ## Etapa 1: Requisitos do produto
 

@@ -1,36 +1,51 @@
-# Trade-offs de Características de Qualidade
+# Trade-offs de Características de Qualidade 
 
-As categorias de requisitos não-funcionais para o produto de software "FocusFlow", conforme o modelo FURPS+, seriam:
+De acordo com o modelo FURPS+, as categorias de requisitos não-funcionais para o produto de software "Recicla Mais" seriam:
 
-1. **Usabilidade**: 
-   
-   a. O sistema deve ser fácil de usar com uma interface intuitiva e amigável, permitindo que 90% dos usuários realizem tarefas sem precisar de assistência após uma única sessão de treinamento.
+## Funcionalidade
 
-2. **Desempenho**: 
-   
-   a. O sistema deve ser altamente responsivo às ações do usuário, garantindo que o tempo de resposta para qualquer interação não ultrapasse 2 segundos, independentemente do número de tarefas que está sendo gerenciado.
+- O sistema deve permitir que os usuários realizem agendamentos de coleta de resíduos eletrônicos de forma segura e eficiente.
+- Deve garantir a rastreabilidade dos resíduos coletados, permitindo que os usuários acompanhem o status da coleta.
+- O sistema deve permitir a atribuição de pontos aos usuários após a confirmação da coleta, possibilitando a troca por benefícios.
+- O sistema deve integrar a API do Google Maps para auxiliar na exibição de endereços e cálculo de rotas para auxiliar e otimizar a logística de coleta.
 
-   b. O sistema deve possuir escalabilidade horizontal através do desacoplamento, alcançada pela implementação de APIs RESTful.
+## Usabilidade
 
-3. **Confiabilidade**: 
-   
-   a. O sistema deve ser robusto e livre de erros, sendo equipado com mecanismos para enfrentar falhas, garantir a recuperação de dados e assegurar uma disponibilidade de 99,9%, o que significa que ele não deve exceder 8,76 horas de inatividade por ano.
-   
-   b. O sistema deve requerer a autenticação de usuários para acessar suas tarefas e configurações pessoais, suportando um mecanismo robusto, como autenticação de dois fatores, para garantir acesso seguro às informações. Em relação à segurança, após três tentativas de login falhas, o usuário é bloqueado temporariamente para evitar tentativas de força bruta. Além disso, as senhas são armazenadas com segurança usando técnicas de hash e sal.
+- O sistema deve possuir uma interface intuitiva e acessível, garantindo que 90% dos usuários consigam realizar um agendamento sem precisar de assistência.
+- Deve oferecer suporte a diferentes dispositivos, incluindo desktops e dispositivos móveis, com design responsivo.
+- O processo de agendamento deve ser rápido e requerer o menor número possível de passos para garantir uma boa experiência do usuário.
+- A API do Google Maps deve ser utilizada para fornecer uma interface amigável de seleção de endereços, permitindo a escolha do local exato da coleta.
 
-4. **Suportabilidade**: 
-   
-   a. O sistema deve ser projetado de forma a facilitar futuras atualizações e manutenção, garantindo que todas as solicitações de suporte sejam respondidas dentro de 24 horas.
+## Confiabilidade
 
-A importância relativa de cada categoria:
+- O sistema deve ter uma disponibilidade mínima de 99,5%, evitando falhas que possam impedir os usuários de realizar agendamentos ou acompanhar suas coletas.
+- Os dados dos usuários e seus agendamentos devem ser armazenados de forma segura, utilizando criptografia e backups regulares.
+- O sistema deve possuir autenticação segura para evitar acessos não autorizados, garantindo a privacidade dos usuários.
 
-| Categoria | Usabilidade | Desempenho | Confiabilidade | Suportabilidade |
-| --- | --- | --- | --- | --- |
-| Usabilidade | - | > | > | > |
-| Desempenho | < | - | < | > |
-| Confiabilidade | < | > | - | > |
-| Suportabilidade | < | < | < | - |
+## Desempenho
 
-> Nesta matriz, o sinal ">" indica que a categoria da linha é mais importante que a categoria da coluna, e o sinal "<" indica que a categoria da linha é menos importante que a categoria da coluna. Por exemplo, a Usabilidade é considerada mais importante que o Desempenho, Confiabilidade e Suportabilidade, enquanto o Desempenho é considerado mais importante que a Suportabilidade, mas menos importante que a Usabilidade e Confiabilidade, e assim por diante.
+- O tempo de resposta para a realização de um agendamento não deve ultrapassar 2 segundos em 95% das interações.
+- O sistema deve ser escalável para suportar um grande número de usuários simultaneamente sem degradação do desempenho.
+- A API deve ser otimizada para processar as solicitações de agendamento e consulta de forma eficiente, garantindo baixa latência.
+- A integração com a API do Google Maps deve ser otimizada para garantir carregamento rápido e evitar sobrecarga no sistema.
 
-[Retorna](../README.md)
+## Suportabilidade
+
+- O sistema deve ser modular para facilitar futuras atualizações e manutenções sem impactar o funcionamento principal.
+- A documentação do código e da API deve ser clara e bem estruturada para facilitar a compreensão por desenvolvedores futuros.
+- A integração com a API do Google Maps deve ser bem documentada para facilitar manutenção e eventuais atualizações.
+
+## A Importância Relativa de Cada Categoria
+
+| Categoria       | Funcionalidade | Usabilidade | Confiabilidade | Desempenho | Suportabilidade |
+|---------------|----------------|------------|---------------|------------|----------------|
+| Funcionalidade | -              | >          | >             | >          | >              |
+| Usabilidade    | <              | -          | >             | >          | >              |
+| Confiabilidade | <              | <          | -             | >          | >              |
+| Desempenho     | <              | <          | <             | -          | >              |
+| Suportabilidade| <              | <          | <             | <          | -              |
+
+> Nesta matriz, o sinal ">" indica que a categoria da linha é mais importante que a categoria da coluna, e o sinal "<" indica que a categoria da linha é menos importante que a categoria da coluna. No caso do "Recicla Mais", a **Funcionalidade** é a característica mais importante, seguida pela **Usabilidade**, garantindo que os usuários possam facilmente utilizar o sistema. A **Confiabilidade** é essencial para garantir que os dados e agendamentos sejam mantidos de forma segura e estável. O **Desempenho** e a **Suportabilidade** são priorizados de acordo com a necessidade de estabilidade e escalabilidade do sistema.
+
+A utilização da **API do Google Maps** contribui para a usabilidade e eficiência do sistema, facilitando a inserção e visualização de endereços e otimizando a logística de coleta, garantindo uma experiência mais fluida para os usuários e maior eficiência operacional.
+
