@@ -19,6 +19,13 @@ namespace ReciclaMaisAPI.Models
         [Required]
         public EstadoConservacao Estado { get; set; }
 
+        [Required]
+        public int AgendamentoId { get; set; }
+
+        public Agendamento Agendamento { get; set; }
+
+
+        // Métodos.
         public int CalculaPontuacao()
         {
             return (Produto.Pontuacao * Quantidade * (int)Estado / 100);

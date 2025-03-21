@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReciclaMaisAPI.Models
 {
+    [Table("Agendamentos")]
     public class Agendamento
     {
         [Key]
@@ -19,6 +21,8 @@ namespace ReciclaMaisAPI.Models
         [Required]
         public List<ItemColeta> ItensColeta { get; set; } = new();
     
+
+        // Métodos.
         public void CalculaPontuacaoTotal()
         {
             PontuacaoTotal = ItensColeta.Sum(item => item.CalculaPontuacao());
