@@ -1,0 +1,6 @@
+@ReciclaMaisAPI_HostAddress = http://localhost:5092
+
+GET {{ReciclaMaisAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
