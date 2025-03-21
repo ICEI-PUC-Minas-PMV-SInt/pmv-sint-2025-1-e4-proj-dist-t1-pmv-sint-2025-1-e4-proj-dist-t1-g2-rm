@@ -49,5 +49,34 @@ namespace ReciclaMaisAPI.Controllers
 
             return Ok(model);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, ProdutoResiduo model)
+        {
+            if (id != model.Id) return BadRequest();
+
+            var modelDb = await _context.ProdutosResiduos.AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+            if (modelDb == null) return NotFound();
+
+            _context.ProdutosResiduos.Update(model);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var model = await _context.ProdutosResiduos
+                .FindAsync(id);
+
+            if (model == null) NotFound();
+
+            _context.ProdutosResiduos.Remove(model);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
