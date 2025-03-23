@@ -1,6 +1,7 @@
 ﻿using ReciclaMaisAPI.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ReciclaMaisAPI.Models
 {
@@ -11,7 +12,11 @@ namespace ReciclaMaisAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public ProdutoResiduo Produto { get; set; } = new();
+        public int ProdutoId { get; set; }
+
+        [ForeignKey("ProdutoId")]
+        [JsonIgnore]
+        public ProdutoResiduo Produto { get; set; }
 
         [Required]
         public int Quantidade { get; set; }
@@ -19,16 +24,21 @@ namespace ReciclaMaisAPI.Models
         [Required]
         public EstadoConservacao Estado { get; set; }
 
-        [Required]
         public int AgendamentoId { get; set; }
 
+        [ForeignKey("AgendamentoId")]
+        [JsonIgnore]
         public Agendamento Agendamento { get; set; }
 
-
-        // Métodos.
-        public int CalculaPontuacao()
+        [NotMapped]
+        public int Pontuacao
         {
-            return (Produto.Pontuacao * Quantidade * (int)Estado / 100);
+            get
+            {
+                return Produto != null
+                    ? (Produto.Pontuacao * Quantidade * (int)Estado) / 100
+                    : 0;
+            }
         }
     }
 }

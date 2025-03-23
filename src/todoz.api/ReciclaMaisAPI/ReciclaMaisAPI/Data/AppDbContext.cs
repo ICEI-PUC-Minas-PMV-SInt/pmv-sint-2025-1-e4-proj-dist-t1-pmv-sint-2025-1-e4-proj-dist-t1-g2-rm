@@ -17,9 +17,16 @@ namespace ReciclaMaisAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ItemColeta>()
-                 .HasOne(i => i.Produto)
-                 .WithMany()
-                 .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(i => i.Produto)
+                .WithMany()
+                .HasForeignKey(i => i.ProdutoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ItemColeta>()
+                .HasOne(i => i.Agendamento)
+                .WithMany(a => a.ItensColeta)
+                .HasForeignKey(i => i.AgendamentoId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

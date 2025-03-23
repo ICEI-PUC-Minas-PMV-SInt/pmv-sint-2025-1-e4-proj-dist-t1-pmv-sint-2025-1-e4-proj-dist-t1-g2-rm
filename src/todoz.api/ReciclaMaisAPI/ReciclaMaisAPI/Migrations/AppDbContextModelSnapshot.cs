@@ -41,7 +41,7 @@ namespace ReciclaMaisAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Agendamentos");
+                    b.ToTable("Agendamentos", (string)null);
                 });
 
             modelBuilder.Entity("ReciclaMaisAPI.Models.ItemColeta", b =>
@@ -70,7 +70,7 @@ namespace ReciclaMaisAPI.Migrations
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("ItensColeta");
+                    b.ToTable("ItensColeta", (string)null);
                 });
 
             modelBuilder.Entity("ReciclaMaisAPI.Models.ProdutoResiduo", b =>
@@ -94,7 +94,7 @@ namespace ReciclaMaisAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos");
+                    b.ToTable("Produtos", (string)null);
                 });
 
             modelBuilder.Entity("ReciclaMaisAPI.Models.ItemColeta", b =>

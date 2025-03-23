@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using ReciclaMaisAPI.Data;
+using System.Text.Json.Serialization;
 
 namespace ReciclaMaisAPI
 {
@@ -11,7 +12,8 @@ namespace ReciclaMaisAPI
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(s => s.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

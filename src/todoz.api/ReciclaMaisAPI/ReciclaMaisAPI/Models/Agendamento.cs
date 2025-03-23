@@ -16,16 +16,9 @@ namespace ReciclaMaisAPI.Models
         public TimeSpan Hora { get; set; }
 
         [Required]
-        public int PontuacaoTotal { get; private set; }
+        public int PontuacaoTotal { get; set; }
 
         [Required]
         public List<ItemColeta> ItensColeta { get; set; } = new();
-    
-
-        // Métodos.
-        public void CalculaPontuacaoTotal()
-        {
-            PontuacaoTotal = ItensColeta.Sum(item => item.CalculaPontuacao());
-        }
     }
 }
