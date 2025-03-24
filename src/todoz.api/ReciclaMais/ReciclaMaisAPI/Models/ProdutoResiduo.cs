@@ -16,6 +16,7 @@ namespace ReciclaMaisAPI.Models
         public string Descricao { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "A pontuação deve ser maior que zero.")]
         public int Pontuacao { get; set; }
     }
 }
