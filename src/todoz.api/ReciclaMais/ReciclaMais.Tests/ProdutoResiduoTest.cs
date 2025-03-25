@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
 using ReciclaMaisAPI.Data;
 using ReciclaMaisAPI.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace ReciclaMaisAPI.Tests
+namespace ReciclaMais.Tests
 {
     [TestFixture]
     public class ProdutoResiduoTest
