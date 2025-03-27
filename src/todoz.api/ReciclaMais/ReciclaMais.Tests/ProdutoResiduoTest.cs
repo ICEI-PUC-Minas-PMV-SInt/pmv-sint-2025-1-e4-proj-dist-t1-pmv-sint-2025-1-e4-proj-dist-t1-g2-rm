@@ -44,13 +44,16 @@ namespace ReciclaMais.Tests
         }
 
         [Test]
-        public void ProdutoComPontuacaoZero_DeveFalharNaValidacaoManual()
+        [TestCase("Item", "Teste", 0, false)] // Deve falhar, pois Pontuação = 0
+        [TestCase("Item", "Teste", -5, false)] // Deve falhar, pois Pontuação < 0
+        [TestCase("Item", "Teste", 10, true)] // Deve passar, pois Pontuação > 0
+        public void ProdutoComPontuacaoMenorOuIgualAZero_DeveValidarPontuacao(string nome, string descricao, int pontuacao, bool esperadoValido)
         {
             var produto = new ProdutoResiduo
             {
-                Nome = "Item",
-                Descricao = "Teste",
-                Pontuacao = 0
+                Nome = nome,
+                Descricao = descricao,
+                Pontuacao = pontuacao
             };
 
             var context = new ValidationContext(produto);
@@ -58,8 +61,12 @@ namespace ReciclaMais.Tests
 
             bool valido = Validator.TryValidateObject(produto, context, results, true);
 
-            Assert.That(valido, Is.False);
-            Assert.That(results.Any(r => r.MemberNames.Contains("Pontuacao")));
+            Assert.That(valido, Is.EqualTo(esperadoValido));
+
+            if (!esperadoValido)
+            {
+                Assert.That(results.Any(r => r.MemberNames.Contains("Pontuacao")));
+            }
         }
 
 
