@@ -86,7 +86,24 @@ namespace ReciclaMais.Tests
         [Test]
         public void AtualizarProduto_DeveModificarDados()
         {
+            // Arrange
+            var produto = new ProdutoResiduo { Id = 99, Nome = "Mouse", Descricao = "Mouse sem fio", Pontuacao = 50 };
+            _context.ProdutosResiduos.Add(produto);
+            _context.SaveChanges();
 
+            // Act
+            produto.Nome = "Mouse Gamer";
+            produto.Descricao = "Mouse sem fio RGB";
+            produto.Pontuacao = 70;
+            _context.ProdutosResiduos.Update(produto);
+            _context.SaveChanges();
+
+            // Assert
+            var produtoAtualizado = _context.ProdutosResiduos.Find(99);
+            Assert.That(produtoAtualizado, Is.Not.Null);
+            Assert.That(produtoAtualizado.Nome, Is.EqualTo("Mouse Gamer"));
+            Assert.That(produtoAtualizado.Descricao, Is.EqualTo("Mouse sem fio RGB"));
+            Assert.That(produtoAtualizado.Pontuacao, Is.EqualTo(70));
         }
 
         [Test]
