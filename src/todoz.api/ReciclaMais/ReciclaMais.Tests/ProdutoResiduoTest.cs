@@ -109,7 +109,18 @@ namespace ReciclaMais.Tests
         [Test]
         public void RemoverProduto_DeveExcluirDoBanco()
         {
+            // Arrange
+            var produto = new ProdutoResiduo { Id = 3, Nome = "Monitor", Descricao = "Monitor LCD", Pontuacao = 120 };
+            _context.ProdutosResiduos.Add(produto);
+            _context.SaveChanges();
 
+            // Act
+            _context.ProdutosResiduos.Remove(produto);
+            _context.SaveChanges();
+
+            // Assert
+            var produtoRemovido = _context.ProdutosResiduos.Find(3);
+            Assert.That(produtoRemovido, Is.Null);
         }
     }
 }
