@@ -43,9 +43,9 @@ namespace ReciclaMaisAPI.Controllers
         public async Task<ActionResult> GetById(int id)
         {
             var model = await _context.ProdutosResiduos
-                .FirstOrDefaultAsync(v => v.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (model == null) NotFound();
+            if (model == null) return NotFound();
 
             return Ok(model);
         }

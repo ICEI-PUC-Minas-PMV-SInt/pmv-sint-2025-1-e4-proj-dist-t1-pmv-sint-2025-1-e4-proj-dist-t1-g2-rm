@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ReciclaMaisAPI.Controllers;
 using ReciclaMaisAPI.Data;
 using ReciclaMaisAPI.Models;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +11,7 @@ namespace ReciclaMais.Tests
     public class ProdutoResiduoTest
     {
         private AppDbContext _context;
+        private ProdutosController _controller;
 
         [SetUp]
         public void Setup()
@@ -24,6 +27,7 @@ namespace ReciclaMais.Tests
                 new ProdutoResiduo { Id = 2, Nome = "Notebook", Descricao = "Notebook quebrado", Pontuacao = 150 }
             );
             _context.SaveChanges();
+            _controller = new ProdutosController(_context);
         }
 
         [TearDown]
@@ -78,9 +82,26 @@ namespace ReciclaMais.Tests
         }
 
         [Test]
-        public void GetProdutoPorId_DeveRetornarProdutoCorreto()
+        [TestCase(1, "Celular", "Celular velho", 100)] // id 1
+        [TestCase(2, "Notebook", "Notebook quebrado", 150)] // id 2
+        public void GetProdutoPorId_DeveRetornarProdutoCorreto(int id, string nome, string descricao, int pontuacao)
         {
+            var produtoTeste = new ProdutoResiduo
+            {
+                Id = id,
+                Nome = nome,
+                Descricao = descricao,
+                Pontuacao = pontuacao
+            };
 
+            var result =  _controller.GetById(id).Result as OkObjectResult;
+
+            Assert.That(result, Is.Not.Null);
+            var produtoDb = result.Value as ProdutoResiduo;
+            Assert.That(produtoDb.Id, Is.EqualTo(produtoTeste.Id));
+            Assert.That(produtoDb.Nome, Is.EqualTo(produtoTeste.Nome));
+            Assert.That(produtoDb.Descricao, Is.EqualTo(produtoTeste.Descricao));
+            Assert.That(produtoDb.Pontuacao, Is.EqualTo(produtoTeste.Pontuacao));
         }
 
         [Test]
