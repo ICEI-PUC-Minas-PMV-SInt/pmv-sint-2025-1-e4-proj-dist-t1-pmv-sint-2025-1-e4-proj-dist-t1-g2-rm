@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './ProductList.css';
+import ProductDelete from './ProductDelete';
+
 
 const ProductList = () => {
   const [produtos, setProdutos] = useState([]);
@@ -51,7 +53,7 @@ const ProductList = () => {
               <td className="td">
                 <button onClick={() => alert(`Ver detalhes do ID ${produto.id}`)} className="action-button">Detalhes</button>
                 <button onClick={() => alert(`Atualizar ID ${produto.id}`)} className="action-button">Atualizar</button>
-                <button onClick={() => alert(`Excluir ID ${produto.id}`)} className="action-button delete-button">Excluir</button>
+                <ProductDelete id={produto.id} onDeleteSuccess={(deletedId) => {setProdutos(produtos.filter(p => p.id !== deletedId));}} />
               </td>
             </tr>
           ))}
