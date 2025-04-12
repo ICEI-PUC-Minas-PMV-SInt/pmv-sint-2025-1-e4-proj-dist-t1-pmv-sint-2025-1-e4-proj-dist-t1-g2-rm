@@ -78,7 +78,26 @@ namespace ReciclaMais.Tests
         [Test]
         public void GetAllProdutos_DeveRetornarTodos()
         {
+            // Act
+            var resultado = _controller.GetAll().Result as OkObjectResult;
 
+            // Assert
+            Assert.That(resultado, Is.Not.Null);
+            var lista = resultado.Value as List<ProdutoResiduo>;
+            Assert.That(lista, Is.Not.Null);
+            Assert.That(lista.Count, Is.EqualTo(2));
+
+            Assert.That(lista.Any(p =>
+             p.Nome == "Celular" &&
+             p.Descricao == "Celular velho" &&
+             p.Pontuacao == 100
+             ), Is.True);
+
+            Assert.That(lista.Any(p =>
+             p.Nome == "Notebook" &&
+             p.Descricao == "Notebook quebrado" &&
+             p.Pontuacao == 150
+             ), Is.True);
         }
 
         [Test]
