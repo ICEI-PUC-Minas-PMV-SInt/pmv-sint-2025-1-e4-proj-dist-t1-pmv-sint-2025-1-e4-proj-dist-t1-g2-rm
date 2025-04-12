@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ProductList.css";
 import ProductDelete from "./ProductDelete";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductList = () => {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     axios
@@ -29,7 +34,7 @@ const ProductList = () => {
       <div className="button-container">
         <button
           className="create-button"
-          onClick={() => alert("Criar componente e chamar api na nova tela.")}
+          onClick={() =>  navigate("/criar")}
         >
           Criar Produto
         </button>
