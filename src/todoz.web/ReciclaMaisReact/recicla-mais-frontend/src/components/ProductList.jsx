@@ -68,11 +68,13 @@ const ProductList = () => {
                 </button>
 
                 <button
-                  onClick={() => alert(`Atualizar ID ${produto.id}`)}
+                  onClick={() => navigate(`/editar/${produto.id}`)}
                   className="action-button"
                 >
                   Atualizar
                 </button>
+
+
                 <ProductDelete
                   id={produto.id}
                   onDeleteSuccess={(deletedId) => {
