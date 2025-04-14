@@ -12,7 +12,7 @@
 
 .button-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
 }
 .create-button {
     margin-bottom: 20px;
