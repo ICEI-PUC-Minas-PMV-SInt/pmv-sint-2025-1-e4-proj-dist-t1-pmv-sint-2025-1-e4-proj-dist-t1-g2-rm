@@ -4,6 +4,7 @@ using ReciclaMaisAPI.Controllers;
 using ReciclaMaisAPI.Data;
 using ReciclaMaisAPI.Models;
 using System.ComponentModel.DataAnnotations;
+using NUnit.Framework;
 
 namespace ReciclaMais.Tests
 {
@@ -16,6 +17,7 @@ namespace ReciclaMais.Tests
         [SetUp]
         public void Setup()
         {
+            // ------------- REMOVER -------------
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: "reciclamaisdb")
                 .Options;
@@ -27,6 +29,8 @@ namespace ReciclaMais.Tests
                 new ProdutoResiduo { Id = 2, Nome = "Notebook", Descricao = "Notebook quebrado", Pontuacao = 150 }
             );
             _context.SaveChanges();
+
+            // -----------------------------------
             _controller = new ProdutosController(_context);
         }
 
@@ -38,21 +42,37 @@ namespace ReciclaMais.Tests
         }
 
         [Test]
-        public void AdicionarProduto_DeveAumentarContagem()
+        public async Task CreateProdutoValido_DeveRetornarCreatedAtAction()
         {
-            var novo = new ProdutoResiduo { Nome = "Tablet", Descricao = "Tablet antigo", Pontuacao = 80 };
-            _context.ProdutosResiduos.Add(novo);
-            _context.SaveChanges();
+            // Arrange
+            var novoProduto = new ProdutoResiduo
+            {
+                Nome = "Teclado",
+                Descricao = "Teclado USB",
+                Pontuacao = 50
+            };
 
-            Assert.That(_context.ProdutosResiduos.Count(), Is.EqualTo(3));
+            // Act
+            var resultado = await _controller.Create(novoProduto);
+
+            // Assert
+            Assert.That(resultado, Is.InstanceOf<CreatedAtActionResult>());
+            var resultadoCriado = resultado as CreatedAtActionResult;
+            Assert.That(resultadoCriado, Is.Not.Null);
+
+            var produtoCriado = resultadoCriado!.Value as ProdutoResiduo;
+
+            Assert.That(produtoCriado, Is.Not.Null);
+            Assert.That(produtoCriado!.Nome, Is.EqualTo("Teclado"));
         }
 
         [Test]
-        [TestCase("Item", "Teste", 0, false)] // Deve falhar, pois Pontuação = 0
-        [TestCase("Item", "Teste", -5, false)] // Deve falhar, pois Pontuação < 0
-        [TestCase("Item", "Teste", 10, true)] // Deve passar, pois Pontuação > 0
-        public void ProdutoComPontuacaoMenorOuIgualAZero_DeveValidarPontuacao(string nome, string descricao, int pontuacao, bool esperadoValido)
+        [TestCase("Teclado", "USB", 0)]      // Deve retornar BadRequest
+        [TestCase("Mouse", "USB", -5)]       // Deve retornar BadRequest
+        [TestCase("Pilha", "Alcalina", 10)]  // Deve retornar CreatedAtAction
+        public async Task CreateProduto_ComportamentoDeveSerConformePontuacao(string nome, string descricao, int pontuacao)
         {
+            // Arrange
             var produto = new ProdutoResiduo
             {
                 Nome = nome,
@@ -60,18 +80,34 @@ namespace ReciclaMais.Tests
                 Pontuacao = pontuacao
             };
 
-            var context = new ValidationContext(produto);
-            var results = new List<ValidationResult>();
+            // Act
+            var resultado = await _controller.Create(produto);
 
-            bool valido = Validator.TryValidateObject(produto, context, results, true);
-
-            Assert.That(valido, Is.EqualTo(esperadoValido));
-
-            if (!esperadoValido)
+            // Assert
+            if (pontuacao <= 0)
             {
-                Assert.That(results.Any(r => r.MemberNames.Contains("Pontuacao")));
+                Assert.That(resultado, Is.InstanceOf<BadRequestObjectResult>());
+            }
+            else
+            {
+                Assert.That(resultado, Is.InstanceOf<CreatedAtActionResult>());
+
+                if (resultado is CreatedAtActionResult created && created.Value is ProdutoResiduo produtoCriado)
+                {
+                    Assert.That(produtoCriado, Is.Not.Null);
+                    Assert.That(produtoCriado.Pontuacao, Is.EqualTo(pontuacao));
+                    Assert.That(produtoCriado.Nome, Is.EqualTo(nome));
+                    Assert.That(produtoCriado.Descricao, Is.EqualTo(descricao));
+                }
+                else
+                {
+                    Assert.Fail("Resultado não contém um ProdutoResiduo válido.");
+                }
             }
         }
+
+
+
 
 
 
