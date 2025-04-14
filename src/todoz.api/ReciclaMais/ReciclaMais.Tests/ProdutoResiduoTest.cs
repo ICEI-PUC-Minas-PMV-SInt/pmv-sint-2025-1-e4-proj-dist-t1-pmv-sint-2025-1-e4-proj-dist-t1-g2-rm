@@ -67,9 +67,9 @@ namespace ReciclaMais.Tests
         }
 
         [Test]
-        [TestCase("Teclado", "USB", 0)]      // Deve retornar BadRequest
-        [TestCase("Mouse", "USB", -5)]       // Deve retornar BadRequest
-        [TestCase("Pilha", "Alcalina", 10)]  // Deve retornar CreatedAtAction
+        [TestCase("Teclado", "USB", 0)]      // BadRequest
+        [TestCase("Mouse", "USB", -5)]       // BadRequest
+        [TestCase("Pilha", "Alcalina", 10)]  // CreatedAtAction
         public async Task CreateProduto_ComportamentoDeveSerConformePontuacao(string nome, string descricao, int pontuacao)
         {
             // Arrange
@@ -101,14 +101,10 @@ namespace ReciclaMais.Tests
                 }
                 else
                 {
-                    Assert.Fail("Resultado não contém um ProdutoResiduo válido.");
+                    Assert.Fail("Resultado não contém um Produto válido.");
                 }
             }
         }
-
-
-
-
 
 
         [Test]
