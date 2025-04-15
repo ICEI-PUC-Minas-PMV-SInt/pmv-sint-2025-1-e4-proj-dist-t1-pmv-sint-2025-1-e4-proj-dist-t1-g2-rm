@@ -2,10 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import ProductDetails from './components/ProductDetails';
-import ProductCreate from "./components/ProductCreate";
-import ProductUpdate from "./components/ProductUpdate";
+import ProductList from './components/pages/Product/ProductList';
+import ProductDetails from './components/pages/Product/ProductDetails';
+import ProductCreate from "./components/pages/Product/ProductCreate";
+import ProductUpdate from "./components/pages/Product/ProductUpdate";
 
 function App() {
   return (

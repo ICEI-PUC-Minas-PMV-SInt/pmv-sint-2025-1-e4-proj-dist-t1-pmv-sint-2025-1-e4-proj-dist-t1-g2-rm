@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ProductList.css";
+import "./styles/ProductList.css";
 import ProductDelete from "./ProductDelete";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,6 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     axios
@@ -34,7 +33,7 @@ const ProductList = () => {
       <div className="button-container">
         <button
           className="create-button"
-          onClick={() =>  navigate("/criar")}
+          onClick={() => navigate("/criar")}
         >
           Criar Produto
         </button>
@@ -66,15 +65,12 @@ const ProductList = () => {
                 >
                   Detalhes
                 </button>
-
                 <button
                   onClick={() => navigate(`/editar/${produto.id}`)}
                   className="action-button"
                 >
                   Atualizar
                 </button>
-
-
                 <ProductDelete
                   id={produto.id}
                   onDeleteSuccess={(deletedId) => {
