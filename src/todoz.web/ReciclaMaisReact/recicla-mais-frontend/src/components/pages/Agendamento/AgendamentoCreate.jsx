@@ -3,6 +3,7 @@ import axios from 'axios';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom'; // IMPORTAÇÃO ADICIONADA
 import './AgendamentoCreate.css';
 
 function AgendamentoCreate() {
@@ -10,6 +11,7 @@ function AgendamentoCreate() {
   const [produtos, setProdutos] = useState([]);
   const [itensColeta, setItensColeta] = useState([{ produtoId: '', quantidade: '', estado: 100 }]);
   const [pontuacaoTotal, setPontuacaoTotal] = useState(0);
+  const navigate = useNavigate(); // USO DO NAVIGATE
 
   useEffect(() => {
     axios.get('https://localhost:7215/api/Produtos')
@@ -46,18 +48,16 @@ function AgendamentoCreate() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (!(data instanceof Date) || isNaN(data.getTime())) {
       alert('Preencha a data e hora corretamente.');
       return;
     }
-  
+
     const pad = (n) => String(n).padStart(2, '0');
-  
-    // Usa a data do widget.
     const dataFormatada = `${data.getFullYear()}-${pad(data.getMonth() + 1)}-${pad(data.getDate())}T${pad(data.getHours())}:${pad(data.getMinutes())}:00`;
     const horaFormatada = `${pad(data.getHours())}:${pad(data.getMinutes())}:00`;
-  
+
     const payload = {
       data: dataFormatada,
       hora: horaFormatada,
@@ -67,12 +67,14 @@ function AgendamentoCreate() {
         estado: parseInt(item.estado)
       }))
     };
-  
+
     axios.post('https://localhost:7215/api/Agendamentos', payload)
-      .then(() => alert('Agendamento realizado com sucesso!'))
+      .then(res => {
+        alert('Agendamento realizado com sucesso!');
+        navigate(`/agendamentos/${res.data.id}`); // REDIRECIONAMENTO APLICADO
+      })
       .catch(err => alert('Erro ao agendar: ' + err.response?.data || err.message));
-    };
-  
+  };
 
   return (
     <div className="container mt-4">
@@ -81,6 +83,7 @@ function AgendamentoCreate() {
           <h3 className="mb-4">Efetuar Agendamento</h3>
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
+              <Form.Label className="fs-5">Data e Hora</Form.Label>
               <Datetime
                 value={data}
                 onChange={value => setData(value.toDate())}

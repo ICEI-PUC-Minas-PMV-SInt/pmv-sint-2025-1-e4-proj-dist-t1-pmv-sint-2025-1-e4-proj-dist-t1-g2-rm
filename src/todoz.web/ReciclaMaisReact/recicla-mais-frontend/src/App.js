@@ -7,6 +7,8 @@ import ProductDetails from './components/pages/Produto/ProductDetails';
 import ProductCreate from "./components/pages/Produto/ProductCreate";
 import ProductUpdate from "./components/pages/Produto/ProductUpdate";
 import AgendamentoCreate from './components/pages/Agendamento/AgendamentoCreate.jsx';
+import AgendamentoList from './components/pages/Agendamento/AgendamentoList.jsx';
+import AgendamentoDetail from './components/pages/Agendamento/AgendamentoDetail.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path="/criar" element={<ProductCreate />} />
           <Route path="/editar/:id" element={<ProductUpdate />} />
           <Route path="/Agendamento" element={<AgendamentoCreate />} />
+          <Route path="/agendamentos" element={<AgendamentoList />} />
+          <Route path="/agendamentos/:id" element={<AgendamentoDetail />} />
         </Routes>
       </div>
     </Router>
