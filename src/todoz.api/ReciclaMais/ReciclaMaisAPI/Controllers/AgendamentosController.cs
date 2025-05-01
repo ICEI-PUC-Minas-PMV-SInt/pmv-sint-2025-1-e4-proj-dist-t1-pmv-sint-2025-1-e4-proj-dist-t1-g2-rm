@@ -58,8 +58,14 @@ namespace ReciclaMaisAPI.Controllers
 
             int pontuacaoTotal = 0;
 
+            if (dto.Data <= DateTime.Today)
+                return BadRequest("A data do agendamento deve ser após a data atual.");
+
             foreach (var item in dto.ItensColeta)
             {
+                if (item.Quantidade <= 0)
+                    return BadRequest($"A quantidade do produto {item.ProdutoId} deve ser maior que zero.");
+
                 var produto = await _context.ProdutosResiduos.FindAsync(item.ProdutoId);
 
                 if (produto == null)
@@ -134,6 +140,9 @@ namespace ReciclaMaisAPI.Controllers
 
             foreach (var itemDto in dto.ItensColeta)
             {
+                if (itemDto.Quantidade <= 0)
+                    return BadRequest($"A quantidade do produto {itemDto.ProdutoId} deve ser maior que zero.");
+
                 var produto = await _context.ProdutosResiduos.FindAsync(itemDto.ProdutoId);
                 if (produto == null)
                     return BadRequest($"Produto com ID {itemDto.ProdutoId} não encontrado.");
