@@ -40,9 +40,9 @@ const AgendamentoList = () => {
               <strong>Hora:</strong> {ag.hora} <br />
               <strong>Pontuação:</strong> {ag.pontuacaoTotal}
             </Card.Text>
-            <Link to={`/agendamentos/${ag.id}`}>
-              <Button variant="primary">Ver Detalhes</Button>
-            </Link>
+                <Link to={`/agendamento/${ag.id}`}>
+                    <Button variant="primary">Ver Detalhes</Button>
+                </Link>
           </Card.Body>
         </Card>
       ))}
