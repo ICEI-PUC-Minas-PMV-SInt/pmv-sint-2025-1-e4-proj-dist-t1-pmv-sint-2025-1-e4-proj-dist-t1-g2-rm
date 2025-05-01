@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ReciclaMaisAPI.Controllers;
 using ReciclaMaisAPI.Data;
 using ReciclaMaisAPI.Models;
-using System.ComponentModel.DataAnnotations;
-using NUnit.Framework;
 
 namespace ReciclaMais.Tests
 {
