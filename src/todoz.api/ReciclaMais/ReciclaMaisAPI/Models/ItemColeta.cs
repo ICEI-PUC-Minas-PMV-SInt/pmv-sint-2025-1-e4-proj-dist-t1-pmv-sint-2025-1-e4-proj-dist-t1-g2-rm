@@ -15,7 +15,6 @@ namespace ReciclaMaisAPI.Models
         public int ProdutoId { get; set; }
 
         [ForeignKey("ProdutoId")]
-        [JsonIgnore]
         public ProdutoResiduo Produto { get; set; }
 
         [Required]

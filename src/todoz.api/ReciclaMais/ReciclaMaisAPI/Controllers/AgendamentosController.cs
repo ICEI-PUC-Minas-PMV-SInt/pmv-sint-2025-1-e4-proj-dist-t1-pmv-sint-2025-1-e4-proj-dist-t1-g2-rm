@@ -126,33 +126,62 @@ namespace ReciclaMaisAPI.Controllers
             if (agendamentoExistente == null)
                 return NotFound();
 
-            _context.ItensColeta.RemoveRange(agendamentoExistente.ItensColeta);
-
             agendamentoExistente.Data = dto.Data;
             agendamentoExistente.Hora = dto.Hora;
-            agendamentoExistente.ItensColeta = new List<ItemColeta>();
 
             int pontuacaoTotal = 0;
+            var novaListaItens = new List<ItemColeta>();
 
-            foreach (var item in dto.ItensColeta)
+            foreach (var itemDto in dto.ItensColeta)
             {
-                var produto = await _context.ProdutosResiduos.FindAsync(item.ProdutoId);
-
+                var produto = await _context.ProdutosResiduos.FindAsync(itemDto.ProdutoId);
                 if (produto == null)
-                    return BadRequest($"Produto com ID {item.ProdutoId} não encontrado.");
+                    return BadRequest($"Produto com ID {itemDto.ProdutoId} não encontrado.");
 
-                var novoItem = new ItemColeta
+                ItemColeta item;
+
+                if (itemDto.Id.HasValue && itemDto.Id.Value > 0)
                 {
-                    ProdutoId = produto.Id,
-                    Produto = produto,
-                    Quantidade = item.Quantidade,
-                    Estado = (Models.Enum.EstadoConservacao)item.Estado
-                };
+                    item = agendamentoExistente.ItensColeta.FirstOrDefault(i => i.Id == itemDto.Id.Value);
 
-                pontuacaoTotal += (produto.Pontuacao * novoItem.Quantidade * (int)novoItem.Estado) / 100;
-                agendamentoExistente.ItensColeta.Add(novoItem);
+                    if (item != null)
+                    {
+                        item.ProdutoId = itemDto.ProdutoId;
+                        item.Produto = produto;
+                        item.Quantidade = itemDto.Quantidade;
+                        item.Estado = (Models.Enum.EstadoConservacao)itemDto.Estado;
+                    }
+                    else
+                    {
+                        item = new ItemColeta
+                        {
+                            ProdutoId = itemDto.ProdutoId,
+                            Produto = produto,
+                            Quantidade = itemDto.Quantidade,
+                            Estado = (Models.Enum.EstadoConservacao)itemDto.Estado
+                        };
+                    }
+                }
+                else
+                {
+                    item = new ItemColeta
+                    {
+                        ProdutoId = itemDto.ProdutoId,
+                        Produto = produto,
+                        Quantidade = itemDto.Quantidade,
+                        Estado = (Models.Enum.EstadoConservacao)itemDto.Estado
+                    };
+                }
+
+                pontuacaoTotal += (produto.Pontuacao * item.Quantidade * (int)item.Estado) / 100;
+                novaListaItens.Add(item);
             }
 
+            // Remove os itens que não estão mais presentes.
+            _context.ItensColeta.RemoveRange(agendamentoExistente.ItensColeta
+                .Where(i => !novaListaItens.Any(n => n.Id == i.Id)));
+
+            agendamentoExistente.ItensColeta = novaListaItens;
             agendamentoExistente.PontuacaoTotal = pontuacaoTotal;
 
             await _context.SaveChangesAsync();
