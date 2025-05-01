@@ -1,0 +1,45 @@
+/* Container dos cards (garantir espaçamento correto) */
+.agendamento-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* Card individual com largura fixa */
+  .agendamento-item {
+    flex: 0 0 calc(33.333% - 20px); /* 3 por linha com gap de 20px */
+    box-sizing: border-box;
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    min-width: 280px;
+    max-width: 100%;
+  }
+  
+  /* Estilização do conteúdo */
+  .agendamento-item .card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  
+  .agendamento-item .card-text {
+    font-size: 1.4rem;
+  }
+  
+/* Botão verde */
+.btn-verde {
+    background-color: #157347 !important;
+    border-color: #157347 !important;
+    color: white !important;
+    font-size: 1.3rem;
+    padding: 0.5rem 1.2rem;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .btn-verde:hover {
+    background-color: #145939 !important;
+    border-color: #145939 !important;
+  }
+  

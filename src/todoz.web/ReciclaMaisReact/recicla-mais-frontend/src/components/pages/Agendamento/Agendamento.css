@@ -48,3 +48,27 @@
   font-size: 1.6rem;
   font-weight: bold;
 }
+
+.agendamento-item {
+  min-width: 300px;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+/* Estilo da paginação verde */
+.pagination .page-item .page-link {
+  color: #157347;
+  border-color: #157347;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #157347;
+  border-color: #157347;
+  color: white;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #145939;
+  border-color: #145939;
+  color: white;
+}

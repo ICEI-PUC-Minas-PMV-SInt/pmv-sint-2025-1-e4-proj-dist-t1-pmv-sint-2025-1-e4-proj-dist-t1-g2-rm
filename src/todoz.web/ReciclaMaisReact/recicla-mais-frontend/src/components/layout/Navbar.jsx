@@ -15,12 +15,12 @@ function Navbar() {
 
       <div className="navbar_links">
         <Link to="/">Home</Link>
-        <Link to="/Noticias">Notícias</Link>
-        <Link to="/Agendamento">Agendamento</Link>
+        <Link to="/noticias">Notícias</Link>
+        <Link to="/agendamento">Agendamento</Link>
       </div>
 
       <div className="navbar_usuario">
-        <Link to="/Login">
+        <Link to="/login">
           <img src={perfil} alt="Perfil do Usuário" />
         </Link>
       </div>

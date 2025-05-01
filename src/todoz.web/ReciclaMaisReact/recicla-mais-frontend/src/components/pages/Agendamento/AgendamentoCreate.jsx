@@ -72,7 +72,7 @@ function AgendamentoCreate() {
     .then(res => {
       const novoId = res.data.id;
       alert('Agendamento realizado com sucesso!');
-      navigate(`/agendamento/${novoId}`);
+      navigate(`/agendamentos/`);
     })
       .catch(err => alert('Erro ao agendar: ' + err.response?.data || err.message));
   };
