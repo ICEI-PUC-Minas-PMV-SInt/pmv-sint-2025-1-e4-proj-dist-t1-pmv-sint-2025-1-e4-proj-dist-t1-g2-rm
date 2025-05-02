@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Row, Col, Pagination } from 'react-bootstrap';
 import AgendamentoItem from './AgendamentoItem';
-import './Agendamento.css';
+import './styles/Agendamento.css';
 
 const AgendamentoList = () => {
   const [agendamentos, setAgendamentos] = useState([]);

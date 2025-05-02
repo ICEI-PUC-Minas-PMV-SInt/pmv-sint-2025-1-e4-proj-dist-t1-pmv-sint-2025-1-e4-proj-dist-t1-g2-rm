@@ -4,7 +4,7 @@ import axios from 'axios';
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
-import './Agendamento.css';
+import './styles/Agendamento.css';
 
 const AgendamentoEdit = () => {
   const { id } = useParams();

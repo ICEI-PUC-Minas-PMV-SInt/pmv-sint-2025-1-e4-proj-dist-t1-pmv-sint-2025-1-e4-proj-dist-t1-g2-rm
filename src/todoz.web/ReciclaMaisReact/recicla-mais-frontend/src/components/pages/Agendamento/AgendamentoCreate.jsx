@@ -4,7 +4,7 @@ import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import './Agendamento.css';
+import './styles/Agendamento.css';
 
 function AgendamentoCreate() {
   const [data, setData] = useState(null);
