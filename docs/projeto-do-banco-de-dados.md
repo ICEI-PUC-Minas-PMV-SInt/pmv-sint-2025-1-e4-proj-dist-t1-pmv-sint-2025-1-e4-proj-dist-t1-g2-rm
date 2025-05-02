@@ -1,5 +1,3 @@
 # Diagrama Entidade-Relacionamento
 
-> Elabore o diagrama entidade-relacionamento do banco de dados da aplicação.
-
-![Diagrama Entidade-Relacionamento](docs/../figuras/diagrama-entidade-relacionamento.png)
+![DiagramaClassesReciclaMais](https://github.com/user-attachments/assets/cf0d6835-57be-41a8-8f5d-303a6ba6c196)
