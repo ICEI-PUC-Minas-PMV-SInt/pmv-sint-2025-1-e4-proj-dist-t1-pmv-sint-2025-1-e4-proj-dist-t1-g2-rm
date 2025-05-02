@@ -13,6 +13,8 @@ namespace ReciclaMaisAPI.Data
         public DbSet<ProdutoResiduo> ProdutosResiduos { get; set; }
         public DbSet<ItemColeta> ItensColeta { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<Noticia> Noticias { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
