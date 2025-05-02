@@ -10,6 +10,13 @@ import AgendamentoCreate from './components/pages/Agendamento/AgendamentoCreate.
 import AgendamentoList from './components/pages/Agendamento/AgendamentoList.jsx';
 import AgendamentoEdit from './components/pages/Agendamento/AgendamentoEdit.jsx';
 import Navbar from './components/layout/Navbar.jsx';
+import NoticiasList from './components/pages/Noticias/NoticiasList';
+import NoticiasCreate from './components/pages/Noticias/NoticiasCreate';
+import NoticiasEdit from './components/pages/Noticias/NoticiasEdit';
+import NoticiasDetails from './components/pages/Noticias/NoticiasDetails';
+import NoticiasDelete from './components/pages/Noticias/NoticiasDelete';
+
+
 
 function App() {
   return (
@@ -25,6 +32,11 @@ function App() {
           <Route path="/agendamento" element={<AgendamentoCreate />} />
           <Route path="/agendamentos" element={<AgendamentoList />} />
           <Route path="/agendamento/:id" element={<AgendamentoEdit />} />
+          <Route path="/noticias" element={<NoticiasList />} />
+          <Route path="/noticias/criar" element={<NoticiasCreate />} />
+          <Route path="/noticias/editar/:id" element={<NoticiasEdit />} />
+          <Route path="/noticias/detalhes/:id" element={<NoticiasDetails />} />
+          <Route path="/noticias/excluir/:id" element={<NoticiasDelete />} />
         </Routes>
       </div>
     </Router>
