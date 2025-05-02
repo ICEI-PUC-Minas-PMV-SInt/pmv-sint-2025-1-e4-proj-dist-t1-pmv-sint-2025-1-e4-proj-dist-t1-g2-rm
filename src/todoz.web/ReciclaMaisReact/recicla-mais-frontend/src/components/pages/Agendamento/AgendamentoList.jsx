@@ -7,7 +7,7 @@ import './Agendamento.css';
 const AgendamentoList = () => {
   const [agendamentos, setAgendamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 9;
+  const itensPorPagina = 3;
 
   useEffect(() => {
     axios.get('https://localhost:7215/api/Agendamentos')
@@ -30,7 +30,9 @@ const AgendamentoList = () => {
 
   return (
     <div className="container mt-4">
-      <h3 className="mb-4 text-center">Todos os Agendamentos</h3>
+      <h3 className="mb-4 text-center">
+        Todos os Agendamentos <span className="text-muted">({agendamentos.length})</span>
+      </h3>
 
       <Row className="g-4">
         {agendamentosPaginados.map(ag => (
