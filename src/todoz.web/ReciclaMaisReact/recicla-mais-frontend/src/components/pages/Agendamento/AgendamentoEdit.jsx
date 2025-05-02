@@ -62,6 +62,17 @@ const AgendamentoEdit = () => {
     setItensColeta(lista);
   };
 
+  const excluirAgendamento = () => {
+    if (window.confirm('Tem certeza que deseja excluir este agendamento?')) {
+      axios.delete(`https://localhost:7215/api/Agendamentos/${id}`)
+        .then(() => {
+          alert('Agendamento excluído!');
+          navigate('/agendamentos');
+        })
+        .catch(err => alert('Erro ao excluir: ' + err.response?.data || err.message));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const pad = n => String(n).padStart(2, '0');
@@ -83,7 +94,7 @@ const AgendamentoEdit = () => {
     axios.put(`https://localhost:7215/api/Agendamentos/${id}`, payload)
       .then(() => {
         alert('Agendamento atualizado com sucesso!');
-        navigate(`/agendamentos`);
+        navigate('/agendamentos');
       })
       .catch(err => alert('Erro ao atualizar: ' + err.response?.data || err.message));
   };
@@ -95,11 +106,11 @@ const AgendamentoEdit = () => {
       <h2 className="mb-4 text-center">Editar Agendamento</h2>
       <Card className="agendamento-card">
         <Card.Body>
-          <h3 className="mb-4 text-center">Data e Horário do Agendamento</h3>
+          <h3 className="mb-4 text-center">Dados Cadastrados</h3>
           <div className="agendamento-container">
             <Form onSubmit={handleSubmit}>
               <Row className="mb-3">
-                <Form.Label className="form-label fs-5">Data e Hora</Form.Label>
+                <Form.Label className="form-label">Data e Hora</Form.Label>
                 <Datetime
                   value={data}
                   onChange={value => setData(value.toDate())}
@@ -165,6 +176,9 @@ const AgendamentoEdit = () => {
                 <Link to="/agendamentos" className="btn btn-outline-secondary fs-4 text-decoration-none">
                   Cancelar
                 </Link>
+                <Button variant="danger" onClick={excluirAgendamento} className="fs-4">
+                  Excluir
+                </Button>
               </div>
 
             </Form>

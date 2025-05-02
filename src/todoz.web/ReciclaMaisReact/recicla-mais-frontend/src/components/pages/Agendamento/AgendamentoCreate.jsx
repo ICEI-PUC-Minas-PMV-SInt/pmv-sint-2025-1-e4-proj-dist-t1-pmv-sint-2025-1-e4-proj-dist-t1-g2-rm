@@ -85,11 +85,11 @@ function AgendamentoCreate() {
           <div className="agendamento-container">
             <Form onSubmit={handleSubmit}>
               <Row className="mb-3">
-                <Form.Label className="form-label fs-5">Data e Hora</Form.Label>
+                <Form.Label className="form-label">Data e Hora</Form.Label>
                 <Datetime
                   value={data}
                   onChange={value => setData(value.toDate())}
-                  inputProps={{ className: "form-control fs-5" }}
+                  inputProps={{ className: "form-control" }}
                   dateFormat="DD/MM/YYYY"
                   timeFormat="HH:mm"
                 />
