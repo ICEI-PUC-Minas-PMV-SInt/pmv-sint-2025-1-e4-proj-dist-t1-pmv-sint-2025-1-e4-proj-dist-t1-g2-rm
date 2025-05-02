@@ -11,7 +11,7 @@ function AgendamentoCreate() {
   const [produtos, setProdutos] = useState([]);
   const [itensColeta, setItensColeta] = useState([{ produtoId: '', quantidade: '', estado: 100 }]);
   const [pontuacaoTotal, setPontuacaoTotal] = useState(0);
-  const navigate = useNavigate(); // USO DO NAVIGATE.
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('https://localhost:7215/api/Produtos')
@@ -69,21 +69,21 @@ function AgendamentoCreate() {
     };
 
     axios.post('https://localhost:7215/api/Agendamentos', payload)
-    .then(res => {
-      const novoId = res.data.id;
-      alert('Agendamento realizado com sucesso!');
-      navigate(`/agendamentos/`);
-    })
+      .then(res => {
+        alert('Agendamento realizado com sucesso!');
+        navigate('/agendamentos');
+      })
       .catch(err => alert('Erro ao agendar: ' + err.response?.data || err.message));
   };
 
   return (
     <div className="container mt-4">
-      <Card>
+      <h2 className="mb-4 text-center">Criar Agendamento</h2>
+      <Card className="agendamento-card">
         <Card.Body>
-          <h3 className="mb-4">Efetuar Agendamento</h3>
-            <div className="agendamento-container">
-              <Form onSubmit={handleSubmit}>
+          <h3 className="mb-4 text-center">Data e Horário do Agendamento</h3>
+          <div className="agendamento-container">
+            <Form onSubmit={handleSubmit}>
               <Row className="mb-3">
                 <Form.Label className="form-label fs-5">Data e Hora</Form.Label>
                 <Datetime
@@ -95,16 +95,15 @@ function AgendamentoCreate() {
                 />
               </Row>
 
-              <h4 className="fs-3">Itens da Coleta</h4>
+              <h3 className="mb-4 text-center">Itens da Coleta</h3>
               {itensColeta.map((item, index) => (
                 <Row key={index} className="align-items-end mb-3">
                   <Col md={4}>
-                    <Form.Label className="form-label fs-5">Produto</Form.Label>
+                    <Form.Label className="form-label">Produto</Form.Label>
                     <Form.Select
                       value={item.produtoId}
                       onChange={(e) => handleChange(index, 'produtoId', e.target.value)}
                       required
-                      className="fs-5"
                     >
                       <option value="">Selecione</option>
                       {produtos.map(p => (
@@ -114,23 +113,21 @@ function AgendamentoCreate() {
                   </Col>
 
                   <Col md={3}>
-                    <Form.Label className="form-label fs-5">Quantidade</Form.Label>
+                    <Form.Label className="form-label">Quantidade</Form.Label>
                     <Form.Control
                       type="number"
                       min={1}
                       value={item.quantidade}
                       onChange={(e) => handleChange(index, 'quantidade', e.target.value)}
                       required
-                      className="fs-5"
                     />
                   </Col>
 
                   <Col md={3}>
-                    <Form.Label className="form-label fs-5">Estado</Form.Label>
+                    <Form.Label className="form-label">Estado</Form.Label>
                     <Form.Select
                       value={item.estado}
                       onChange={(e) => handleChange(index, 'estado', e.target.value)}
-                      className="fs-5"
                     >
                       <option value={100}>Doação</option>
                       <option value={50}>Descarte</option>
@@ -143,16 +140,17 @@ function AgendamentoCreate() {
                 </Row>
               ))}
 
-              <Button variant="secondary" onClick={adicionarItem} className="btn-adicionar-item mb-3">+ Adicionar Item</Button>
+              <Button onClick={adicionarItem} className="btn-adicionar-item mb-4">+ Adicionar Item</Button>
 
-              <div className="pontuacao-total mb-3 fs-4">
+              <div className="pontuacao-total text-success mb-3 fs-4">
                 <strong>Pontuação Total:</strong> {pontuacaoTotal}
               </div>
 
-              <Button type="submit" variant="success" className="fs-4">Agendar</Button>
+              <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
+                <Button type="submit" className="btn-verde fs-4">Agendar</Button>
+              </div>
             </Form>
           </div>
-
         </Card.Body>
       </Card>
     </div>
