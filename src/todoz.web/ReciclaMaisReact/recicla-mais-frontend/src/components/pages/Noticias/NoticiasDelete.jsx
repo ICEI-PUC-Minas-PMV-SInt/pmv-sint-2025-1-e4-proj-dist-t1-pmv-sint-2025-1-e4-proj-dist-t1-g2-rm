@@ -9,7 +9,7 @@ const NoticiasDelete = () => {
   const [noticia, setNoticia] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:7215/api/noticias/${id}`)
+    axios.get(`https://localhost:7215/api/noticias/${id}`)
       .then(response => setNoticia(response.data))
       .catch(error => {
         console.error('Erro ao carregar notícia:', error);
@@ -20,7 +20,7 @@ const NoticiasDelete = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/noticias/${id}`);
+      await axios.delete(`https://localhost:5000/api/noticias/${id}`);
       alert('Notícia excluída com sucesso!');
       navigate('/noticias');
     } catch (error) {

@@ -12,7 +12,7 @@ const NoticiasEdit = () => {
   const [autor, setAutor] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:7215/api/noticias/${id}`)
+    axios.get(`https://localhost:7215/api/noticias/${id}`)
       .then(response => {
         const noticia = response.data;
         setTitulo(noticia.titulo);
@@ -25,7 +25,7 @@ const NoticiasEdit = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/noticias/${id}`, {
+      await axios.put(`https://localhost:7215/api/noticias/${id}`, {
         id,
         titulo,
         conteudo,

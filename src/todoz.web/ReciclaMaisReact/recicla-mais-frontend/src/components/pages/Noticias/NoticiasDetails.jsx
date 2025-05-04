@@ -8,7 +8,7 @@ const NoticiasDetails = () => {
   const [noticia, setNoticia] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:7215/api/noticias/${id}`)
+    axios.get(`https://localhost:7215/api/noticias/${id}`)
       .then(response => setNoticia(response.data))
       .catch(error => {
         console.error('Erro ao carregar os detalhes da notícia:', error);
