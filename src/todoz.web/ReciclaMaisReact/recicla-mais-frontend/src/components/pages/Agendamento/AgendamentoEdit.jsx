@@ -103,7 +103,7 @@ const AgendamentoEdit = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4 text-center">Editar Agendamento</h2>
+      <h2 className="mb-4 text-center">Agendamento (#{ id })</h2>
       <Card className="agendamento-card">
         <Card.Body>
           <h3 className="mb-4 text-center">Dados Cadastrados</h3>
