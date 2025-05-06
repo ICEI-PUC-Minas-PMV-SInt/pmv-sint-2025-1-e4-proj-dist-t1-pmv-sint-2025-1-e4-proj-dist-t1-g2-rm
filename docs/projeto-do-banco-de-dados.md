@@ -1,5 +1,3 @@
 # Diagrama Entidade-Relacionamento
 
-> Elabore o diagrama entidade-relacionamento do banco de dados da aplicação.
-
-![Diagrama Entidade-Relacionamento](docs/../figuras/diagrama-entidade-relacionamento.png)
+![modeloer](https://github.com/user-attachments/assets/db525c62-ce57-4143-91a8-d69a7c8bef99)
