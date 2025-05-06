@@ -17,7 +17,6 @@ import NoticiasDetails from './components/pages/Noticias/NoticiasDetails';
 import NoticiasDelete from './components/pages/Noticias/NoticiasDelete';
 
 
-
 function App() {
   return (
     <Router>

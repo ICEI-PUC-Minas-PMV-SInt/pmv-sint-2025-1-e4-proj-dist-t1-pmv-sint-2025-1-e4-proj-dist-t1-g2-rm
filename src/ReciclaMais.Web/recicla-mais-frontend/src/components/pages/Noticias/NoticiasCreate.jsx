@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './styles/Noticias.css';
+import apiBaseUrl from '../../../apiconfig';
 
 
 const NoticiasCreate = () => {
@@ -11,7 +12,7 @@ const NoticiasCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://localhost:7215/api/noticias', {
+      await axios.post(`${apiBaseUrl}/noticias`, {
         titulo,
         conteudo,
         autor

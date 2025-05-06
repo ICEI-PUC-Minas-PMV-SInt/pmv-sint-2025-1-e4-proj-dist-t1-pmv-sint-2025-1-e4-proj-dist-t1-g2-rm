@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./styles/ProductCreate.css"; 
+import apiBaseUrl from '../../../apiconfig';
 
 const ProductCreate = () => {
   const [nome, setNome] = useState("");
@@ -13,7 +14,7 @@ const ProductCreate = () => {
     e.preventDefault();
 
     try {
-      await axios.post("https://localhost:7215/api/Produtos", {
+      await axios.post(`${apiBaseUrl}/Produtos`, {
         nome,
         descricao,
         pontuacao: parseInt(pontuacao),

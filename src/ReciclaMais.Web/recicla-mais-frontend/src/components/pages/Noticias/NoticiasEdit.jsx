@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './styles/Noticias.css';
+import apiBaseUrl from '../../../apiconfig';
 
 const NoticiasEdit = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const NoticiasEdit = () => {
   const [autor, setAutor] = useState('');
 
   useEffect(() => {
-    axios.get(`https://localhost:7215/api/noticias/${id}`)
+    axios.get(`${apiBaseUrl}/noticias/${id}`)
       .then(response => {
         const noticia = response.data;
         setTitulo(noticia.titulo);
@@ -25,7 +26,7 @@ const NoticiasEdit = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://localhost:7215/api/noticias/${id}`, {
+      await axios.put(`${apiBaseUrl}/noticias/${id}`, {
         id,
         titulo,
         conteudo,

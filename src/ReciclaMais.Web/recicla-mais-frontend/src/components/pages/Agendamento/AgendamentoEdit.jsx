@@ -5,6 +5,7 @@ import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
 import './styles/Agendamento.css';
+import apiBaseUrl from '../../../apiconfig';
 
 const AgendamentoEdit = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ const AgendamentoEdit = () => {
   const [pontuacaoTotal, setPontuacaoTotal] = useState(0);
 
   useEffect(() => {
-    axios.get(`https://localhost:7215/api/Agendamentos/${id}`)
+    axios.get(`${apiBaseUrl}/Agendamentos/${id}`)
       .then(res => {
         const ag = res.data;
         setData(new Date(ag.data));
@@ -30,7 +31,7 @@ const AgendamentoEdit = () => {
       })
       .catch(err => console.error('Erro ao buscar agendamento', err));
 
-    axios.get('https://localhost:7215/api/Produtos')
+    axios.get(`${apiBaseUrl}/Produtos`)      
       .then(res => setProdutos(res.data))
       .catch(err => console.error('Erro ao carregar produtos', err));
   }, [id]);
@@ -64,7 +65,8 @@ const AgendamentoEdit = () => {
 
   const excluirAgendamento = () => {
     if (window.confirm('Tem certeza que deseja excluir este agendamento?')) {
-      axios.delete(`https://localhost:7215/api/Agendamentos/${id}`)
+      axios.delete(`${apiBaseUrl}/Agendamentos/${id}`)
+      
         .then(() => {
           alert('Agendamento excluído!');
           navigate('/agendamentos');
@@ -91,7 +93,7 @@ const AgendamentoEdit = () => {
       }))
     };
 
-    axios.put(`https://localhost:7215/api/Agendamentos/${id}`, payload)
+    axios.put(`${apiBaseUrl}/Agendamentos/${id}`, payload)
       .then(() => {
         alert('Agendamento atualizado com sucesso!');
         navigate('/agendamentos');

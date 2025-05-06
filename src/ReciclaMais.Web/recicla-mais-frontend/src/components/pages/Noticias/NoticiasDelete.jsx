@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './styles/Noticias.css';
+import apiBaseUrl from '../../../apiconfig';
 
 const NoticiasDelete = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const NoticiasDelete = () => {
   const [noticia, setNoticia] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://localhost:7215/api/noticias/${id}`)
+    axios.get(`${apiBaseUrl}/noticias/${id}`)
       .then(response => setNoticia(response.data))
       .catch(error => {
         console.error('Erro ao carregar notícia:', error);
@@ -20,7 +21,7 @@ const NoticiasDelete = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://localhost:5000/api/noticias/${id}`);
+      await axios.delete(`${apiBaseUrl}/noticias/${id}`);
       alert('Notícia excluída com sucesso!');
       navigate('/noticias');
     } catch (error) {

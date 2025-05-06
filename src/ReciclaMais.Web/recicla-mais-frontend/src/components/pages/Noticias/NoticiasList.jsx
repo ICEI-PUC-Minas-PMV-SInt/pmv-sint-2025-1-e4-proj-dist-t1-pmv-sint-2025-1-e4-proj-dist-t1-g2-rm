@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../Produto/styles/ProductList.css';     // Reutilizando o estilo do ProductList
+import apiBaseUrl from '../../../apiconfig';
 
 const NoticiasList = () => {
   const [noticias, setNoticias] = useState([]);
@@ -9,7 +10,7 @@ const NoticiasList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://localhost:7215/api/noticias')
+    axios.get(`${apiBaseUrl}/noticias`)
       .then(response => {
         setNoticias(response.data);
         setLoading(false);
@@ -24,7 +25,7 @@ const NoticiasList = () => {
     if (!window.confirm('Tem certeza que deseja excluir esta notícia?')) return;
 
     try {
-      await axios.delete(`https://localhost:7215/api/noticias/${id}`);
+      await axios.delete(`${apiBaseUrl}/noticias/${id}`);
       setNoticias(noticias.filter(n => n.id !== id));
       alert('Notícia excluída com sucesso.');
     } catch (error) {

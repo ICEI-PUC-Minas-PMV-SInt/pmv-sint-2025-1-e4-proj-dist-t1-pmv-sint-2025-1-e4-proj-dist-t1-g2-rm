@@ -5,6 +5,7 @@ import "react-datetime/css/react-datetime.css";
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './styles/Agendamento.css';
+import apiBaseUrl from '../../../apiconfig';
 
 function AgendamentoCreate() {
   const [data, setData] = useState(null);
@@ -14,7 +15,7 @@ function AgendamentoCreate() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('https://localhost:7215/api/Produtos')
+    axios.get(`${apiBaseUrl}/Produtos`)
       .then(res => setProdutos(res.data))
       .catch(err => console.error('Erro ao carregar produtos', err));
   }, []);
@@ -68,7 +69,7 @@ function AgendamentoCreate() {
       }))
     };
 
-    axios.post('https://localhost:7215/api/Agendamentos', payload)
+    axios.post(`${apiBaseUrl}/Agendamentos`, payload)
       .then(res => {
         alert('Agendamento realizado com sucesso!');
         navigate('/agendamentos');

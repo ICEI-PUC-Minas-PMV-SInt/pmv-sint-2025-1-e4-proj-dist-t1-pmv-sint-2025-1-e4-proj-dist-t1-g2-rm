@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import apiBaseUrl from '../../../apiconfig';
 
 
 const ProductDetails = () => {
@@ -11,7 +12,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7215/api/Produtos/${id}`)
+      .get(`${apiBaseUrl}/Produtos/${id}`)
       .then((response) => {
         setProduto(response.data);
         setErro("");

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './styles/Noticias.css';
+import apiBaseUrl from '../../../apiconfig';
 
 const NoticiasDetails = () => {
   const { id } = useParams();
   const [noticia, setNoticia] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://localhost:7215/api/noticias/${id}`)
+    axios.get(`${apiBaseUrl}/noticias/${id}`)
       .then(response => setNoticia(response.data))
       .catch(error => {
         console.error('Erro ao carregar os detalhes da notícia:', error);

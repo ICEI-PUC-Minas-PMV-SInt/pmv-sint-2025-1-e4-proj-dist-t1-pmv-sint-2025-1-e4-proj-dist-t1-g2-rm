@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Row, Col, Pagination } from 'react-bootstrap';
 import AgendamentoItem from './AgendamentoItem';
 import './styles/Agendamento.css';
+import apiBaseUrl from '../../../apiconfig';
+
+
 
 const AgendamentoList = () => {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -10,7 +13,7 @@ const AgendamentoList = () => {
   const itensPorPagina = 3;
 
   useEffect(() => {
-    axios.get('https://localhost:7215/api/Agendamentos')
+    axios.get(`${apiBaseUrl}/Agendamentos`)
       .then(res => setAgendamentos(res.data))
       .catch(err => console.error('Erro ao buscar agendamentos', err));
   }, []);

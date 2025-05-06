@@ -3,6 +3,7 @@ import axios from "axios";
 import "./styles/ProductList.css";
 import ProductDelete from "./ProductDelete";
 import { useNavigate } from "react-router-dom";
+import apiBaseUrl from '../../../apiconfig';
 
 
 const ProductList = () => {
@@ -13,7 +14,7 @@ const ProductList = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7215/api/Produtos")
+      .get(`${apiBaseUrl}/Produtos`)
       .then((response) => {
         setProdutos(response.data);
         setLoading(false);

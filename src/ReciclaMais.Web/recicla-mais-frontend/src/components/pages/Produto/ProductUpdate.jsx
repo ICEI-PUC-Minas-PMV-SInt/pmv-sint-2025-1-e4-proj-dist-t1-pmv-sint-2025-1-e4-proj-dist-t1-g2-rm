@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import apiBaseUrl from '../../../apiconfig';
 
 const ProductUpdate = () => {
   const { id } = useParams(); 
@@ -13,7 +14,7 @@ const ProductUpdate = () => {
 
   useEffect(() => {
     axios
-      .get(`https://localhost:7215/api/Produtos/${id}`)
+      .get(`${apiBaseUrl}/Produtos/${id}`)
       .then((response) => {
         setProduto(response.data);
         setNome(response.data.nome);
@@ -41,8 +42,8 @@ const ProductUpdate = () => {
     }
 
     try {
-      await axios.put(`https://localhost:7215/api/Produtos/${id}`, {
-        id: parseInt(id), // <-- This is the fix
+      await axios.put(`${apiBaseUrl}/Produtos/${id}`, {
+        id: parseInt(id),
         nome,
         descricao,
         pontuacao: parseInt(pontuacao),

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import apiBaseUrl from '../../../apiconfig';
 
 const ProductDelete = ({ id, onDeleteSuccess }) => {
   const handleDelete = async () => {
@@ -7,7 +8,7 @@ const ProductDelete = ({ id, onDeleteSuccess }) => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`https://localhost:7215/api/Produtos/${id}`);
+      await axios.delete(`${apiBaseUrl}/api/Produtos/${id}`);
       onDeleteSuccess(id); // callback para atualizar lista
       alert(`Produto ${id} excluído com sucesso!`);
     } catch (error) {
