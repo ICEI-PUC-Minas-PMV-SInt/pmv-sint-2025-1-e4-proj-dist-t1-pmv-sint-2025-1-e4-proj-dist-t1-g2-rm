@@ -1,23 +1,32 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ReciclaMais.API.Data;
 using ReciclaMais.API.Models;
+using ReciclaMais.API.Models.Dto;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ReciclaMais.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UsuariosController(AppDbContext context)
+        public UsuariosController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/Usuarios
@@ -37,7 +46,7 @@ namespace ReciclaMais.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-            // Fetch a single user by ID
+        
             var usuario = await _context.Usuarios
                 .Include(u => u.Municipe)
                 .Include(u => u.OrgaoPublico)
@@ -46,7 +55,7 @@ namespace ReciclaMais.API.Controllers
 
             if (usuario == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound(); 
             }
 
             return Ok(usuario);
@@ -54,12 +63,41 @@ namespace ReciclaMais.API.Controllers
 
         // POST: api/Usuarios
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Usuario>> PostUsuario(UsuarioCreateDTO usuarioDTO)
         {
-            if (usuario == null)
+            if (usuarioDTO == null)
                 return BadRequest("Usuário inválido.");
 
-            // Set TipoUsuario based on provided details
+           
+            if (!string.IsNullOrEmpty(usuarioDTO.Password))
+            {
+                usuarioDTO.Password = BCrypt.Net.BCrypt.HashPassword(usuarioDTO.Password);
+            }
+            else
+            {
+                return BadRequest("Password cannot be empty");
+            }
+
+          
+            Usuario usuario = new Usuario
+            {
+                Nome = usuarioDTO.Nome,
+                Estado = usuarioDTO.Estado,
+                Cidade = usuarioDTO.Cidade,
+                Bairro = usuarioDTO.Bairro,
+                Rua = usuarioDTO.Rua,
+                CEP = usuarioDTO.CEP,
+                Numero = usuarioDTO.Numero,
+                Complemento = usuarioDTO.Complemento,
+                Username = usuarioDTO.Username,
+                Password = usuarioDTO.Password, 
+                Tipo = usuarioDTO.Tipo,
+                OrgaoPublico = usuarioDTO.OrgaoPublico,
+                Administrador = usuarioDTO.Administrador,
+                Municipe = usuarioDTO.Municipe
+            };
+
+           
             if (!string.IsNullOrWhiteSpace(usuario.Municipe?.Cpf))
             {
                 usuario.Tipo = TipoUsuario.Municipe;
@@ -76,37 +114,46 @@ namespace ReciclaMais.API.Controllers
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id }, usuario);
+            return NoContent();
         }
 
         // PUT: api/Usuarios/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, Usuario usuario)
+        public async Task<IActionResult> PutUsuario(int id, UsuarioCreateDTO usuarioDto)
         {
-            if (id != usuario.Id)
+           
+            var usuario = await _context.Usuarios.FindAsync(id);
+
+      
+            if (usuario == null)
             {
-                return BadRequest(); // Return 400 if ID in URL doesn't match the provided usuario ID
+                return NotFound(); 
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+           
+            usuario.Tipo = usuario.Tipo; 
 
-            try
+            
+            usuario.Nome = usuarioDto.Nome;
+            usuario.Estado = usuarioDto.Estado;
+            usuario.Cidade = usuarioDto.Cidade;
+            usuario.Bairro = usuarioDto.Bairro;
+            usuario.Rua = usuarioDto.Rua;
+            usuario.CEP = usuarioDto.CEP;
+            usuario.Numero = usuarioDto.Numero;
+            usuario.Complemento = usuarioDto.Complemento;
+            usuario.Username = usuarioDto.Username;
+
+            
+            if (!string.IsNullOrEmpty(usuarioDto.Password))
             {
-                await _context.SaveChangesAsync(); // Try to save the changes to the database
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsuarioExists(id))
-                {
-                    return NotFound(); // Return 404 if the user doesn't exist
-                }
-                else
-                {
-                    throw;
-                }
+                usuario.Password = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Password);
             }
 
-            return NoContent(); // Return 204 for a successful update with no content to return
+            
+            await _context.SaveChangesAsync();
+
+            return NoContent(); 
         }
 
         // DELETE: api/Usuarios/{id}
@@ -116,18 +163,49 @@ namespace ReciclaMais.API.Controllers
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario == null)
             {
-                return NotFound(); // Return 404 if the user to delete doesn't exist
+                return NotFound(); 
             }
 
-            _context.Usuarios.Remove(usuario); // Remove the user
+            _context.Usuarios.Remove(usuario); 
             await _context.SaveChangesAsync();
 
-            return NoContent(); // Return 204 for a successful deletion with no content to return
+            return NoContent(); 
         }
 
-        private bool UsuarioExists(int id)
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateDTO authenticateDto)
         {
-            return _context.Usuarios.Any(e => e.Id == id); // Check if the user exists in the database
+            if (string.IsNullOrWhiteSpace(authenticateDto.Username) || string.IsNullOrWhiteSpace(authenticateDto.Password))
+                return BadRequest("Username and password are required.");
+
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Username == authenticateDto.Username);
+
+            if (usuario == null || !BCrypt.Net.BCrypt.Verify(authenticateDto.Password, usuario.Password))
+                return Unauthorized("Invalid credentials.");
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes("ReciclaMaisSuperSecureKey123456!@#$");
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
+                    new Claim(ClaimTypes.Name, usuario.Username),
+                    new Claim(ClaimTypes.Role, usuario.Tipo.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                Issuer = _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"],
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwtToken = tokenHandler.WriteToken(token);
+
+            return Ok(new { token = jwtToken });
         }
     }
 }

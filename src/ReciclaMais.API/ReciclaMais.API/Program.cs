@@ -1,6 +1,9 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ReciclaMais.API.Data;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace ReciclaMais.API
@@ -26,6 +29,26 @@ namespace ReciclaMais.API
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            //Ex Prof. Kleber
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;  
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,  
+                        ValidateAudience = false,  
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ReciclaMaisSuperSecureKey123456!@#$"))
+                    };
+                });
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -41,6 +64,8 @@ namespace ReciclaMais.API
 
             app.UseHttpsRedirection();
 
+            //Autenticacao
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors("AllowAll");
