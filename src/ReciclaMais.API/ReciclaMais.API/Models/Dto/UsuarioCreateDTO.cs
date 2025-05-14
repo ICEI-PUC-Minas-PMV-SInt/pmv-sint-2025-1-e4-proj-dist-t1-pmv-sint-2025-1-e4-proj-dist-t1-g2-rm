@@ -1,19 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-public enum TipoUsuario
+public class UsuarioCreateDTO
 {
-    OrgaoPublico,
-    Administrador,
-    Municipe
-}
-
-public class Usuario
-{
-    [Key]
-    public int Id { get; set; }
-
     [Required]
     public string Nome { get; set; }
 
@@ -40,16 +29,13 @@ public class Usuario
     [Required]
     public string Username { get; set; }
 
-    [Required]
-    [JsonIgnore]
     public string Password { get; set; }
 
     [Required]
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public TipoUsuario Tipo { get; set; }
 
-
-    public OrgaoPublico OrgaoPublico{ get; set; }
-    public Administrador Administrador{ get; set; }
+    public OrgaoPublico OrgaoPublico { get; set; }
+    public Administrador Administrador { get; set; }
     public Municipe Municipe { get; set; }
 }
