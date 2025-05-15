@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/logo-reciclamais.png';
-import perfil from '../../assets/imagem-usuario.png';
 
 function Navbar() {
   return (
@@ -21,6 +20,7 @@ function Navbar() {
 
       <div className="navbar_cadastro">
         <Link to="/cadastro" className="nav-cadastro">Cadastro</Link>
+        <Link to="/login" className="nav-login" style={{ marginLeft: '15px' }}>Login</Link>
       </div>
     </nav>
   );

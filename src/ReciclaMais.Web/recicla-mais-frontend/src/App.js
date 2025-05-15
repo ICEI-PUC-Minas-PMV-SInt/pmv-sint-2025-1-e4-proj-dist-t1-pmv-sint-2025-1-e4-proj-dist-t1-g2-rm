@@ -19,6 +19,8 @@ import CadastroEscolha from './components/pages/Autenticacao/CadastroEscolha.jsx
 import RegistroAdministrador from './components/pages/Autenticacao/RegistroAdministrador.jsx';
 import RegistroMunicipe from './components/pages/Autenticacao/RegistroMunicipe.jsx';
 import RegistroOrgaoPublico from './components/pages/Autenticacao/RegistroOrgaoPublico.jsx';
+import Login from './components/pages/Autenticacao/Login.jsx';
+
 
 
 
@@ -48,6 +50,8 @@ function App() {
           <Route path="/cadastro-administrador" element={<RegistroAdministrador />} />
           <Route path="/cadastro-orgao-publico" element={<RegistroOrgaoPublico />} />
           <Route path="/cadastro" element={<CadastroEscolha />} />
+          <Route path="/login" element={<Login onLoginSuccess={() => { /* your login success handler or redirect here */ }} />} />
+
 
         </Routes>
       </div>
