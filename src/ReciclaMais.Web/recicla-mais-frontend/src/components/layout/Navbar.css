@@ -52,3 +52,11 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+/*cadastro margin*/
+.navbar_cadastro {
+  margin-right: 40px; /* or whatever spacing you want */
+}
+
+
+

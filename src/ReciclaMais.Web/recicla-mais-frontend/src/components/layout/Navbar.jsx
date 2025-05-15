@@ -19,10 +19,8 @@ function Navbar() {
         <Link to="/agendamento">Agendamento</Link>
       </div>
 
-      <div className="navbar_usuario">
-        <Link to="/login">
-          <img src={perfil} alt="Perfil do Usuário" />
-        </Link>
+      <div className="navbar_cadastro">
+        <Link to="/cadastro" className="nav-cadastro">Cadastro</Link>
       </div>
     </nav>
   );

@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using ReciclaMais.API.Data;
 using ReciclaMais.API.Models;
 using ReciclaMais.API.Models.Dto;
+using ReciclaMais.API.Models.Dto.Dtos_registro;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -207,5 +208,95 @@ namespace ReciclaMais.API.Controllers
 
             return Ok(new { token = jwtToken });
         }
+
+        // Municipe/OrgaoPublico/Administrador Endpoit de Registro
+
+        [AllowAnonymous]
+        [HttpPost("registrar-municipe")]
+        public async Task<ActionResult> RegistrarMunicipe([FromBody] MunicipeCreateDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = new Usuario
+            {
+                Nome = dto.Nome,
+                Estado = dto.Estado,
+                Cidade = dto.Cidade,
+                Bairro = dto.Bairro,
+                Rua = dto.Rua,
+                CEP = dto.CEP,
+                Numero = dto.Numero,
+                Complemento = dto.Complemento,
+                Username = dto.Username,
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Tipo = TipoUsuario.Municipe, // Tipo Municipe
+                Municipe = new Municipe { Cpf = dto.Cpf }
+            };
+
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(201, "Usuário registrado com sucesso.");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("registrar-administrador")]
+        public async Task<ActionResult> RegistrarAdministrador([FromBody] AdministradorCreateDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = new Usuario
+            {
+                Nome = dto.Nome,
+                Estado = dto.Estado,
+                Cidade = dto.Cidade,
+                Bairro = dto.Bairro,
+                Rua = dto.Rua,
+                CEP = dto.CEP,
+                Numero = dto.Numero,
+                Complemento = dto.Complemento,
+                Username = dto.Username,
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Tipo = TipoUsuario.Administrador //Tipo Administrador
+            };
+
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(201, "Administrador registrado com sucesso.");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("registrar-orgaopublico")]
+        public async Task<ActionResult> RegistrarOrgaoPublico([FromBody] OrgaoPublicoCreateDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = new Usuario
+            {
+                Nome = dto.Nome,
+                Estado = dto.Estado,
+                Cidade = dto.Cidade,
+                Bairro = dto.Bairro,
+                Rua = dto.Rua,
+                CEP = dto.CEP,
+                Numero = dto.Numero,
+                Complemento = dto.Complemento,
+                Username = dto.Username,
+                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                Tipo = TipoUsuario.OrgaoPublico, // Tipo Órgão Público
+                OrgaoPublico = new OrgaoPublico { CNPJ = dto.CNPJ }
+            };
+
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(201, "Usuário registrado com sucesso.");
+        }
+
+
     }
 }
