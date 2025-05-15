@@ -7,7 +7,7 @@ public class OrgaoPublico
     public int UsuarioId { get; set; }
 
     [Required]
-    public string Orgao { get; set; }
+    public string CNPJ { get; set; }
 
     public Usuario Usuario { get; set; }
 }

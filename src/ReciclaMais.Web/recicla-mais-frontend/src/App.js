@@ -12,9 +12,16 @@ import AgendamentoEdit from './components/pages/Agendamento/AgendamentoEdit.jsx'
 import Navbar from './components/layout/Navbar.jsx';
 import NoticiasList from './components/pages/Noticias/NoticiasList';
 import NoticiasCreate from './components/pages/Noticias/NoticiasCreate';
-import NoticiasEdit from './components/pages/Noticias/NoticiasEdit';
+import NoticiasEdit from './components/pages/Noticias/NoticiasEdit'
 import NoticiasDetails from './components/pages/Noticias/NoticiasDetails';
 import NoticiasDelete from './components/pages/Noticias/NoticiasDelete';
+import CadastroEscolha from './components/pages/Autenticacao/CadastroEscolha.jsx';
+import RegistroAdministrador from './components/pages/Autenticacao/RegistroAdministrador.jsx';
+import RegistroMunicipe from './components/pages/Autenticacao/RegistroMunicipe.jsx';
+import RegistroOrgaoPublico from './components/pages/Autenticacao/RegistroOrgaoPublico.jsx';
+
+
+
 
 
 function App() {
@@ -36,6 +43,12 @@ function App() {
           <Route path="/noticias/editar/:id" element={<NoticiasEdit />} />
           <Route path="/noticias/detalhes/:id" element={<NoticiasDetails />} />
           <Route path="/noticias/excluir/:id" element={<NoticiasDelete />} />
+
+          <Route path="/cadastro-municipe" element={<RegistroMunicipe />} />
+          <Route path="/cadastro-administrador" element={<RegistroAdministrador />} />
+          <Route path="/cadastro-orgao-publico" element={<RegistroOrgaoPublico />} />
+          <Route path="/cadastro" element={<CadastroEscolha />} />
+
         </Routes>
       </div>
     </Router>
