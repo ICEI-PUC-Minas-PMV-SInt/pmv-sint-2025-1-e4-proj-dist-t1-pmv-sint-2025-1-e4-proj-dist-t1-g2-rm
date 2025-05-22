@@ -19,7 +19,12 @@ import CadastroEscolha from './components/pages/Autenticacao/CadastroEscolha.jsx
 import RegistroAdministrador from './components/pages/Autenticacao/RegistroAdministrador.jsx';
 import RegistroMunicipe from './components/pages/Autenticacao/RegistroMunicipe.jsx';
 import RegistroOrgaoPublico from './components/pages/Autenticacao/RegistroOrgaoPublico.jsx';
-
+import Login from './components/pages/Autenticacao/Login.jsx';
+import FaleConoscoCreate from './components/pages/FaleConosco/FaleConoscoCreate.jsx';
+import FaleConoscoDetails from './components/pages/FaleConosco/FaleConoscoDetails.jsx';
+import FaleConoscoEdit from './components/pages/FaleConosco/FaleConoscoEdit.jsx';
+import FaleConoscoDelete from './components/pages/FaleConosco/FaleConoscoDelete.jsx';
+import FaleConoscoList from './components/pages/FaleConosco/FaleConoscoList.jsx';
 
 
 
@@ -48,6 +53,13 @@ function App() {
           <Route path="/cadastro-administrador" element={<RegistroAdministrador />} />
           <Route path="/cadastro-orgao-publico" element={<RegistroOrgaoPublico />} />
           <Route path="/cadastro" element={<CadastroEscolha />} />
+          <Route path="/login" element={<Login onLoginSuccess={() => { /* your login success handler or redirect here */ }} />} />
+
+          <Route path="/faleconosco" element={<FaleConoscoList />} />
+          <Route path="/faleconosco/criar" element={<FaleConoscoCreate />} />
+          <Route path="/faleconosco/:id/detalhe" element={<FaleConoscoDetails />} />
+          <Route path="/faleconosco/:id/editar" element={<FaleConoscoEdit />} />
+          <Route path="/faleconosco/:id/excluir" element={<FaleConoscoDelete />} />
 
         </Routes>
       </div>
