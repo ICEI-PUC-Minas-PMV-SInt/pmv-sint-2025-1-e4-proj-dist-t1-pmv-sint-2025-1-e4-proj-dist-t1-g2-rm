@@ -173,6 +173,7 @@ namespace ReciclaMais.API.Controllers
             return NoContent(); 
         }
 
+        //Autenticação feita por JWT bearer
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] AuthenticateDTO authenticateDto)
