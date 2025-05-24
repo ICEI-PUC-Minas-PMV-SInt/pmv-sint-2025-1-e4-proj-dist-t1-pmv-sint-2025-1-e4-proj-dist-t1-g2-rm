@@ -16,6 +16,8 @@ function Navbar() {
         <Link to="/">Home</Link>
         <Link to="/noticias">Notícias</Link>
         <Link to="/agendamento">Agendamento</Link>
+        
+        <Link to="/beneficios">Benefícios</Link>
         <Link to="/faleconosco">Fale Conosco</Link>
 
       </div>

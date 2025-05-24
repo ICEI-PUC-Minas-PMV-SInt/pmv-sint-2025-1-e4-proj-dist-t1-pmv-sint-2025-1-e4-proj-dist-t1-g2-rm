@@ -11,7 +11,7 @@ namespace ReciclaMais.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] // ainda não foram implementados os roles
+    //[Authorize] // ainda não foram implementados os roles
     public class BeneficiosController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -62,22 +62,34 @@ namespace ReciclaMais.API.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(BeneficioCreateDTO dto)
         {
-            if (dto.PontosNecessarios <= 0)
+            try
             {
-                return BadRequest(new { message = "Os pontos necessários devem ser maiores que zero." });
+                if (dto.PontosNecessarios <= 0)
+                {
+                    return BadRequest(new { message = "Os pontos necessários devem ser maiores que zero." });
+                }
+
+                if (string.IsNullOrWhiteSpace(dto.Titulo) || string.IsNullOrWhiteSpace(dto.Descricao))
+                {
+                    return BadRequest(new { message = "Título e Descrição são obrigatórios." });
+                }
+
+                var beneficio = new Beneficio
+                {
+                    Titulo = dto.Titulo,
+                    Descricao = dto.Descricao,
+                    PontosNecessarios = dto.PontosNecessarios
+                };
+
+                _context.Beneficios.Add(beneficio);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetById), new { id = beneficio.Id }, beneficio);
             }
-
-            var beneficio = new Beneficio
+            catch (Exception ex)
             {
-                Titulo = dto.Titulo,
-                Descricao = dto.Descricao,
-                PontosNecessarios = dto.PontosNecessarios
-            };
-
-            _context.Beneficios.Add(beneficio);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = beneficio.Id }, beneficio);
+                return StatusCode(500, new { message = "Erro no servidor: " + ex.Message });
+            }
         }
 
         // PUT: api/Beneficios/5

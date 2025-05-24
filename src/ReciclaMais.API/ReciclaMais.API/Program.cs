@@ -53,6 +53,8 @@ namespace ReciclaMais.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+//            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -65,10 +67,11 @@ namespace ReciclaMais.API
             app.UseHttpsRedirection();
 
             //Autenticacao
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("AllowAll");
+            
 
             app.MapControllers();
 
