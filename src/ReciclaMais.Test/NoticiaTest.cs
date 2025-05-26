@@ -124,7 +124,9 @@ namespace ReciclaMais.Tests
         [Test]
         public async Task Update_QuandoValido_DeveRetornarNoContent()
         {
-            var noticia = new Noticia { Id = 1, Titulo = "Atualizado", Conteudo = "Conteúdo atualizado", DataPublicacao = DateTime.UtcNow };
+            var noticia = await _context.Noticias.FirstOrDefaultAsync(n => n.Id == 1);
+            noticia.Titulo = "Atualizado";
+            noticia.Conteudo = "Conteúdo atualizado";
 
             var resultado = await _controller.Update(1, noticia);
 
