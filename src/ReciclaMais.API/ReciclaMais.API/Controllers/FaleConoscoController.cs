@@ -39,7 +39,8 @@ namespace ReciclaMais.API.Controllers
             var novaMensagem = new FaleConosco
             {
                 Nome = dto.Nome,
-                Telefone = dto.Telefone
+                Telefone = dto.Telefone,
+                Email= dto.Email
             };
 
             _context.FaleConoscos.Add(novaMensagem);
@@ -61,10 +62,41 @@ namespace ReciclaMais.API.Controllers
             return Ok();
         }
 
-        public async Task<bool> Create(FaleConosco novoContato)
+        [HttpPost("novo-contato")]
+        public async Task<ActionResult<FaleConosco>> CreateNovoContato(FaleConosco novoContato)
         {
-            return CreatedAtAction(nameof(GetById), new { id = novaMensagem.Id }, novaMensagem);
+            _context.FaleConoscos.Add(novoContato);
+            await _context.SaveChangesAsync();
 
+            return CreatedAtAction(nameof(GetById), new { id = novoContato.Id }, novoContato);
+        }
+
+        //public async Task<bool> Create(FaleConosco contatoInvalido)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, FaleConoscoCreateDTO dto)
+        {
+            // Busca a entidade existente no banco de dados
+            var faleconoscoExistente = await _context.FaleConosco.FindAsync(id);
+
+            if (faleconoscoExistente == null)
+            {
+                return NotFound();
+            }
+
+            // Atualiza os campos da entidade existente
+            faleconoscoExistente.Nome = dto.Nome;
+            faleconoscoExistente.Telefone = dto.Telefone;
+            faleconoscoExistente.Email = dto.Email;
+
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
-}
+
+    }

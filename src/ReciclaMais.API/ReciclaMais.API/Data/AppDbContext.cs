@@ -15,8 +15,9 @@ namespace ReciclaMais.API.Data
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Noticia> Noticias { get; set; }
         public DbSet<FaleConosco> FaleConoscos { get; set; }
-       
-       
+        public DbSet<Beneficio> Beneficios { get; set; }
+
+
 
         // Usuario Dbset
         public DbSet<Usuario> Usuarios { get; set; }

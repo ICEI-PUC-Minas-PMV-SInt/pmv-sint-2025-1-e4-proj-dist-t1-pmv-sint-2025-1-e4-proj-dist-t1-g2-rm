@@ -134,7 +134,7 @@ namespace ReciclaMais.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FaleConoscos");
+                    b.ToTable("FaleConosco");
                 });
 
             modelBuilder.Entity("ReciclaMais.API.Models.ItemColeta", b =>

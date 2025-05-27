@@ -48,7 +48,7 @@ namespace ReciclaMais.API
                     };
                 });
 
-
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -60,6 +60,7 @@ namespace ReciclaMais.API
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
@@ -74,6 +75,7 @@ namespace ReciclaMais.API
             
 
             app.MapControllers();
+           
 
             app.Run();
         }
