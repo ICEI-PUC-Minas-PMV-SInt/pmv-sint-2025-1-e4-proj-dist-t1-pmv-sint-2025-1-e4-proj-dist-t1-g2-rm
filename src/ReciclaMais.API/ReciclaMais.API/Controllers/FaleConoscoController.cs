@@ -2,11 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using ReciclaMais.API.Data;
 using ReciclaMais.API.Models;
+using ReciclaMais.API.Models.Dto;
 
 namespace ReciclaMais.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class FaleConoscoController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -16,88 +17,54 @@ namespace ReciclaMais.API.Controllers
             _context = context;
         }
 
-        // GET: api/FaleConosco
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FaleConosco>>> GetFaleConoscos()
+        public async Task<ActionResult> GetAll()
         {
-            return await _context.FaleConoscos.ToListAsync();
+            var mensagens = await _context.FaleConoscos.ToListAsync();
+            return Ok(mensagens);
         }
 
-        // GET: api/FaleConosco
         [HttpGet("{id}")]
-        public async Task<ActionResult<FaleConosco>> GetFaleConosco(int id)
+        public async Task<ActionResult> GetById(int id)
         {
-            var faleConosco = await _context.FaleConoscos.FindAsync(id);
+            var mensagem = await _context.FaleConoscos.FindAsync(id);
+            if (mensagem == null) return NotFound();
 
-            if (faleConosco == null)
-            {
-                return NotFound();
-            }
-
-            return faleConosco;
+            return Ok(mensagem);
         }
 
-        // PUT: api/FaleConosco/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFaleConosco(int id, FaleConosco faleConosco)
-        {
-            if (id != faleConosco.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(faleConosco).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FaleConoscoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/FaleConosco
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<FaleConosco>> PostFaleConosco(FaleConosco faleConosco)
+        public async Task<ActionResult<FaleConosco>> Create(FaleConoscoCreateDTO dto)
         {
-            _context.FaleConoscos.Add(faleConosco);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetFaleConosco", new { id = faleConosco.Id }, faleConosco);
-        }
-
-        // DELETE: api/FaleConosco/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFaleConosco(int id)
-        {
-            var faleConosco = await _context.FaleConoscos.FindAsync(id);
-            if (faleConosco == null)
+            var novaMensagem = new FaleConosco
             {
-                return NotFound();
-            }
+                Nome = dto.Nome,
+                Telefone = dto.Telefone
+            };
 
-            _context.FaleConoscos.Remove(faleConosco);
+            _context.FaleConoscos.Add(novaMensagem);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return CreatedAtAction(nameof(GetById), new { id = novaMensagem.Id }, novaMensagem);
         }
 
-        private bool FaleConoscoExists(int id)
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            return _context.FaleConoscos.Any(e => e.Id == id);
+            var mensagem = await _context.FaleConoscos.FindAsync(id);
+            if (mensagem == null) return NotFound();
+
+            _context.FaleConoscos.Remove(mensagem);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        public async Task<bool> Create(FaleConosco novoContato)
+        {
+            return CreatedAtAction(nameof(GetById), new { id = novaMensagem.Id }, novaMensagem);
+
         }
     }
 }

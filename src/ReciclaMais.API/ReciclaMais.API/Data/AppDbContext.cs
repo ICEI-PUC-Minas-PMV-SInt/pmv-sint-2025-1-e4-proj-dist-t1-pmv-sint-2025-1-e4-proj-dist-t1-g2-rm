@@ -15,14 +15,17 @@ namespace ReciclaMais.API.Data
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<Noticia> Noticias { get; set; }
         public DbSet<FaleConosco> FaleConoscos { get; set; }
-        public DbSet<Beneficio> Beneficios { get; set; }
-
+       
+       
 
         // Usuario Dbset
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Municipe> Municipes { get; set; }
         public DbSet<OrgaoPublico> OrgaosPublicos { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<FaleConosco> FaleConosco { get; set; }
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,8 +41,6 @@ namespace ReciclaMais.API.Data
                 .WithMany(a => a.ItensColeta)
                 .HasForeignKey(i => i.AgendamentoId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
 
             // Relacionamento dos Usuarios
             modelBuilder.Entity<Usuario>()
