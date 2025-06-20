@@ -5,13 +5,13 @@
 namespace ReciclaMais.API.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateFaleConosco : Migration
+    public partial class CreateFaleConoscoCorrigida : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FaleConoscos",
+                name: "FaleConosco",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -22,7 +22,7 @@ namespace ReciclaMais.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FaleConoscos", x => x.Id);
+                    table.PrimaryKey("PK_FaleConosco", x => x.Id);
                 });
         }
 
@@ -30,7 +30,7 @@ namespace ReciclaMais.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FaleConoscos");
+                name: "FaleConosco");
         }
     }
 }

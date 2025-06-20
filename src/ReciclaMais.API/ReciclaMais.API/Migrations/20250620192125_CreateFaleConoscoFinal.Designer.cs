@@ -12,8 +12,8 @@ using ReciclaMais.API.Data;
 namespace ReciclaMais.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250518005419_CreateFaleConosco")]
-    partial class CreateFaleConosco
+    [Migration("20250620192125_CreateFaleConoscoFinal")]
+    partial class CreateFaleConoscoFinal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,30 @@ namespace ReciclaMais.API.Migrations
                     b.ToTable("Agendamentos");
                 });
 
+            modelBuilder.Entity("ReciclaMais.API.Models.Beneficio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PontosNecessarios")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Beneficios");
+                });
+
             modelBuilder.Entity("ReciclaMais.API.Models.FaleConosco", b =>
                 {
                     b.Property<int>("Id")
@@ -113,7 +137,7 @@ namespace ReciclaMais.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FaleConoscos");
+                    b.ToTable("FaleConosco", (string)null);
                 });
 
             modelBuilder.Entity("ReciclaMais.API.Models.ItemColeta", b =>

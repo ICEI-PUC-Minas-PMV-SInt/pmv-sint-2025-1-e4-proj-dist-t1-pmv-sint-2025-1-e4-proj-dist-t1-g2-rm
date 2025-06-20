@@ -9,11 +9,6 @@
     "mssql2": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:SQLCONNSTR_TODOZDB"
-    },
-    "mssql3": {
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:DefaultConnection",
-      "dynamicId": null
     }
   }
 }

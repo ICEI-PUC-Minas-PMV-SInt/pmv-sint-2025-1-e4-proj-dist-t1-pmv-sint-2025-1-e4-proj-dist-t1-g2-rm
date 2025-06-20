@@ -66,7 +66,7 @@ namespace ReciclaMais.API
             }
 
             app.UseHttpsRedirection();
-
+                
             //Autenticacao
             app.UseCors("AllowAll");
             app.UseAuthentication();
