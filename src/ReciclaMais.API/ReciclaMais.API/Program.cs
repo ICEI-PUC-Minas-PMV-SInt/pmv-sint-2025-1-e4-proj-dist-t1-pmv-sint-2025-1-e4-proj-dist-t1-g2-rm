@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,68 +13,79 @@ namespace ReciclaMais.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Controllers + ciclos de referência
             builder.Services.AddControllers()
                 .AddJsonOptions(s => s.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+            // CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll",
-                    builder => builder.AllowAnyOrigin()
-                                      .AllowAnyMethod()
-                                      .AllowAnyHeader());
+                    policy => policy.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader());
             });
 
+            // Banco de Dados SQL Server
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            //Ex Prof. Kleber
+            // Autenticação JWT
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddJwtBearer(options =>
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.SaveToken = true;
-                    options.RequireHttpsMetadata = false;  
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = false,  
-                        ValidateAudience = false,  
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ReciclaMaisSuperSecureKey123456!@#$"))
-                    };
-                });
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes("ReciclaMaisSuperSecureKey123456!@#$"))
+                };
+            });
 
-            
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-//            builder.Logging.SetMinimumLevel(LogLevel.Debug);
-
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Tratamento de erros
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
+            }
+            else
+            {
+                app.UseExceptionHandler("/error"); // opcional: crie um endpoint de erro se quiser
             }
 
+            // Swagger (em todos os ambientes)
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ReciclaMaisAPI V1");
+                c.RoutePrefix = "swagger";
+            });
+
+            // HTTPS
             app.UseHttpsRedirection();
-                
-            //Autenticacao
+
+            // CORS
             app.UseCors("AllowAll");
+
+            // Autenticação e autorização
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
-
+            // Mapear controllers
             app.MapControllers();
-           
 
             app.Run();
         }
