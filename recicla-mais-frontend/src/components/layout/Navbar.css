@@ -1,0 +1,62 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 0.2px solid #e7e2e2;
+  background-color: #fff;
+}
+
+.navbar_logo {
+  display: flex;
+  height: 60px;
+  width: 25%;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.navbar_logo img {
+  height: 60px;
+}
+
+.navbar_links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 60px;
+  gap: 30px;
+}
+
+.navbar_links a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #000;
+  padding: 0 10px;
+}
+
+.navbar_links a:hover {
+  color: #64A822;
+}
+
+.navbar_usuario {
+  display: flex;
+  height: 60px;
+  width: 25%;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.navbar_usuario img {
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/*cadastro margin*/
+.navbar_cadastro {
+  margin-right: 40px; /* or whatever spacing you want */
+}
+
+
+

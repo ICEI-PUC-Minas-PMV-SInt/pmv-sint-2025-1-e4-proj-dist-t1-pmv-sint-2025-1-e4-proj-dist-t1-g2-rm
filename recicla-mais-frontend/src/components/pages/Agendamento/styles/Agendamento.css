@@ -1,0 +1,66 @@
+/* Estilo base para campos */
+.form-control,
+.form-select,
+.btn,
+.form-label {
+  font-size: 1.6rem !important;
+}
+
+/* Container da tela */
+.agendamento-container {
+  padding: 2rem;
+}
+
+/* Estilo visual geral do card principal */
+.agendamento-card {
+  box-sizing: border-box;
+  border-radius: 20px !important;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels alinhadas à esquerda */
+.form-label {
+  text-align: left;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Texto de pontuação */
+.pontuacao-total {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* Botão verde principal */
+.btn-verde {
+  background-color: #157347 !important;
+  border-color: #157347 !important;
+  color: white !important;
+  font-size: 1.3rem;
+  padding: 0.5rem 1.2rem;
+  margin-top: 0 !important;
+}
+
+.btn-verde:hover {
+  background-color: #145939 !important;
+  border-color: #145939 !important;
+}
+
+/* Estilo da paginação em verde */
+.pagination .page-item .page-link {
+  color: #157347;
+  border-color: #157347;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #157347;
+  border-color: #157347;
+  color: white;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #145939;
+  border-color: #145939;
+  color: white;
+}
